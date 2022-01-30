@@ -6,7 +6,7 @@
 /*   By: dpadrini <dpadrini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 10:53:01 by dpadrini          #+#    #+#             */
-/*   Updated: 2022/01/23 17:18:57 by dpadrini         ###   ########.fr       */
+/*   Updated: 2022/01/27 15:23:44 by dpadrini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,8 @@ char	**ft_split(char const *s, char c)
 	int		i;
 	int		a;
 
+	if (!s)
+		return (NULL);
 	parts = howmanyparts(s, c);
 	split = (char **)malloc(sizeof(char *) * (parts + 1));
 	if (!split)
@@ -78,11 +80,7 @@ char	**ft_split(char const *s, char c)
 		while (*s == c)
 			s++;
 		while (*s != c && *s)
-		{
-			split[a][i] = *s;
-			i++;
-			s++;
-		}
+			split[a][i++] = *s++;
 		a++;
 	}
 	return (split);

@@ -6,7 +6,7 @@
 /*   By: dpadrini <dpadrini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 11:33:50 by dpadrini          #+#    #+#             */
-/*   Updated: 2022/01/18 11:58:42 by dpadrini         ###   ########.fr       */
+/*   Updated: 2022/01/27 14:25:03 by dpadrini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,13 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	size_t	c;
 	char	*str;
 
+	if (!s1 || !s2)
+		return (NULL);
 	str = (char *)malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
-	i = 0;
-	c = 0;
 	if (!str)
 		return (NULL);
+	i = 0;
+	c = 0;
 	while (s1[i])
 	{
 		str[i] = s1[i];

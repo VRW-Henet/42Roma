@@ -6,7 +6,7 @@
 /*   By: dpadrini <dpadrini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 09:49:57 by dpadrini          #+#    #+#             */
-/*   Updated: 2022/01/18 22:25:14 by dpadrini         ###   ########.fr       */
+/*   Updated: 2022/01/29 15:47:56 by dpadrini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,15 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
 	char			*str;
 	unsigned int	i;
-	size_t			size_a;
 	size_t			size_b;
 
-	if (ft_strlen(s) > len)
-		size_a = len;
-	else
-		size_a = ft_strlen(s);
-	str = (char *)malloc(sizeof(char) * (size_a + 1));
-	if (!str)
+	if (!s)
 		return (NULL);
+	if (len > ft_strlen(s))
+		len = ft_strlen(s);
+	str = (char *)malloc(sizeof(char) * (len + 1));
+	if (!str)
+		return (ft_calloc(1, 1));
 	i = 0;
 	size_b = 0;
 	while (s[i] && i < start)

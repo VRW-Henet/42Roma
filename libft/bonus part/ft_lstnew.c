@@ -1,37 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_lstnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dpadrini <dpadrini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/15 17:43:39 by dpadrini          #+#    #+#             */
-/*   Updated: 2022/01/18 22:22:54 by dpadrini         ###   ########.fr       */
+/*   Created: 2022/01/25 11:27:58 by dpadrini          #+#    #+#             */
+/*   Updated: 2022/01/29 17:21:13 by dpadrini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strdup(const char *s1)
+t_list	*ft_lstnew(void *content)
 {
-	size_t	len;
-	char	*cpy;
-	int		i;
+	t_list	*new_node;
 
-	len = ft_strlen(s1) + 1;
-	cpy = malloc(sizeof(*s1) * (len));
-	if (!cpy)
+	new_node = malloc(sizeof(*new_node));
+	if (!new_node)
 		return (NULL);
-	i = 0;
-	if (!s1)
-	{
-		return (NULL);
-	}
-	while (s1[i])
-	{
-		cpy[i] = s1[i];
-		i++;
-	}
-	cpy[i] = '\0';
-	return (cpy);
+	new_node->content = content;
+	new_node->next = NULL;
+	return (new_node);
 }
