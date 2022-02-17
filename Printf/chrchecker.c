@@ -6,11 +6,11 @@
 /*   By: dpadrini <dpadrini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 10:09:50 by dpadrini          #+#    #+#             */
-/*   Updated: 2022/02/14 15:02:15 by dpadrini         ###   ########.fr       */
+/*   Updated: 2022/02/17 13:40:27 by dpadrini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf"
 
 int	check_flags(char *str, int i, t_flag *flags)
 {	
@@ -37,28 +37,24 @@ int	check_flags(char *str, int i, t_flag *flags)
 	return (i);
 }
 
-void	convert(char *str, int i, t_flag *flag)
+void	check_for_conversions(char *str, int i, t_flag *flag)
 {
-	while (str[i])
-	{
 		if (str[i] == 'c')
-			print_sc(str, *flag, '0');
+			i = print_sc(str, i, args, flag, 0);
 		else if (str[i] == 's')
-			print_sc(str, *flag, '1');
+			i = print_sc(str, i, args, flag, 1);
 		else if (str[i] == 'p')
-			print_p(str, *flag);
-		else if (str[i] == 'd')
-			print_id(str, *flag, '0');
-		else if (str[i] == 'i')
-			print_id(str, *flag, '1');
+			i = print_p(str, i, args, flag);
+		else if (str[i] == 'd' || str[i] == 'i'
+			i = print_id(str, i, args, flag);
 		else if (str[i] == 'u')
-			print_u(str, *flag);
-		else if (str[i] == 'x')
-			print_xX(str, *flag, '0');
-		else if (str[i] == 'X')
-			print_xX(str, *flag, '1');
+			i = print_u(str, i, args, flag);
+		else if (str[i] == 'x' || str[i] == 'X')
+			i = print_xX(str, i, args, flag);
 		else if (str[i] == '%')
-			ft_putchar_fd('%', 1);
-		i++;
-	}
+		{
+			printchar('%', flag)
+			i++;
+		}
+		return (i);
 }
