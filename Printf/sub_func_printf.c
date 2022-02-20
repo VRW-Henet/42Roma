@@ -6,13 +6,13 @@
 /*   By: dpadrini <dpadrini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 14:39:51 by dpadrini          #+#    #+#             */
-/*   Updated: 2022/02/20 10:49:30 by dpadrini         ###   ########.fr       */
+/*   Updated: 2022/02/20 11:52:19 by dpadrini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	flags_at_zero(t_flag *flag, int io)
+t_flag	flags_at_zero(t_flag *flag, int io)
 {	
 	flag->type = '\0';
 	flag->minu = 0;
@@ -25,6 +25,7 @@ void	flags_at_zero(t_flag *flag, int io)
 	flag->widt = 0;
 	if (io == 0)
 		flag->leng = 0;
+	return (*flag);
 }
 
 int	ft_strlen(const char *str)
@@ -39,9 +40,9 @@ int	ft_strlen(const char *str)
 	return (i);
 }
 
-int	check_n_print(char *str, size_t size, t_flag *flag)
+int	check_n_print(char *str, int size, t_flag *flag)
 {
-	size_t	i;
+	int	i;
 
 	i = -1;
 	while (str[size])
@@ -62,7 +63,7 @@ int	check_n_print(char *str, size_t size, t_flag *flag)
 			printchar('%', flag);
 			i++;
 		}
-		if (str[i] != '%')
+		else if (str[i] != '%')
 			printchar(str[i], flag);
 	}
 	return (size);

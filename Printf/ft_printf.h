@@ -6,7 +6,7 @@
 /*   By: dpadrini <dpadrini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 10:56:45 by dpadrini          #+#    #+#             */
-/*   Updated: 2022/02/20 10:46:14 by dpadrini         ###   ########.fr       */
+/*   Updated: 2022/02/20 11:46:49 by dpadrini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,9 @@ int		print_p(int i, va_list args, t_flag *flag);
 int		print_id(int i, va_list args, t_flag *flags);
 int		print_u(int i, va_list args, t_flag *flags);
 int		print_x(char *str, int i, va_list args, t_flag *flags);
-void	flags_at_zero(t_flag *flag, int io);
+t_flag	flags_at_zero(t_flag *flag, int io);
 int		ft_strlen(const char *str);
-int		check_n_print(char *str, size_t size, t_flag *flag);
+int		check_n_print(char *str, int size, t_flag *flag);
 int		look_for_flags(char *str, int i, t_flag *flag);
 void	ft_putnbr_hex(char ch, long long int num, t_flag *flag);
 int		ft_isdigit(int c);
