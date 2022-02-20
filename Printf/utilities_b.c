@@ -6,7 +6,7 @@
 /*   By: dpadrini <dpadrini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 11:53:16 by dpadrini          #+#    #+#             */
-/*   Updated: 2022/02/18 12:32:18 by dpadrini         ###   ########.fr       */
+/*   Updated: 2022/02/20 10:52:31 by dpadrini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int	ft_putnbr(long long int n, t_flag *flag)
 	char	result[18];
 	int		i;
 
-	if (flag->poin && flag->accuracy == 0 && n == 0)
+	if (flag->poin && flag->prec == 0 && n == 0)
 		return (0);
 	i = 1;
 	if (n == 0)
@@ -97,10 +97,10 @@ void	putnbr_ptr(unsigned long num, char *base, t_flag *flag)
 	}
 	i--;
 	if (i)
-		ft_putstr("0x", flag);
+		printstr("0x", flag);
 	while (i)
 	{
-		ft_putchar(result[i], flag);
+		printchar(result[i], flag);
 		i--;
 	}
 }

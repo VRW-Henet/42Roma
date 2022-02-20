@@ -6,7 +6,7 @@
 /*   By: dpadrini <dpadrini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 10:55:29 by dpadrini          #+#    #+#             */
-/*   Updated: 2022/02/18 11:49:15 by dpadrini         ###   ########.fr       */
+/*   Updated: 2022/02/20 10:37:06 by dpadrini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,19 @@
 
 int	print_sc(char *str, int i, va_list args, t_flag *flag)
 {
-	int	len;
+	int		len;
+	char	*s;
 
-	va_arg(args, char *);
-	len = ft_strlen(arg);
-	if (arg == NULL)
-		len == 6;
-	if (str[i] == s && flag->poin && flag->prec < len)
+	s = va_arg(args, char *);
+	len = ft_strlen(s);
+	if (args == NULL)
+		len = 6;
+	if (str[i] == 's' && flag->poin && flag->prec < len)
 		len = flag->prec;
 	if (flag->widt && !flag->minu)
 		print_stuff(flag->widt - len, flag, 1);
-	if (arg != NULL)
-		printstr(arg, flag);
+	if (args != NULL)
+		printstr(s, flag);
 	else
 		printstr("(null)", flag);
 	if (flag->widt && flag->minu)
@@ -34,7 +35,7 @@ int	print_sc(char *str, int i, va_list args, t_flag *flag)
 	return (i);
 }
 
-int	print_p(char *str, int i, va_list args, t_flag *flag)
+int	print_p(int i, va_list args, t_flag *flag)
 {
 	void	*ptr;
 	int		n;
@@ -57,13 +58,12 @@ int	print_p(char *str, int i, va_list args, t_flag *flag)
 	return (i);
 }
 
-int	print_id(char *str, int i, va_list args, t_flag *flags)
+int	print_id(int i, va_list args, t_flag *flag)
 {
 	int	n;
 	int	num;
 
-	va_arg(args, int);
-	num = arg;
+	num = va_arg(args, int);
 	n = len_num(num);
 	if (((flag->plus || flag->spce) && num >= 0) || num < 0)
 		n++;
@@ -80,7 +80,7 @@ int	print_id(char *str, int i, va_list args, t_flag *flags)
 	return (++i);
 }
 
-int	print_u(char *str, int i, va_list args, t_flag *flags)
+int	print_u(int i, va_list args, t_flag *flag)
 {
 	unsigned int	num;
 	int				n;
@@ -94,7 +94,7 @@ int	print_u(char *str, int i, va_list args, t_flag *flags)
 	if (flag->poin && flag->prec == 0 && num == 0)
 		n = 0;
 	if (flag->widt && !flag->minu)
-		prin_stuff(flag->widt - n, flag, 1);
+		print_stuff(flag->widt - n, flag, 1);
 	if (flag->plus)
 		printchar('+', flag);
 	if (flag->spce && !flag->plus)
@@ -108,7 +108,7 @@ int	print_u(char *str, int i, va_list args, t_flag *flags)
 	return (i);
 }
 
-int	print_x(char *str, int i, va_list args, t_flag *flags)
+int	print_x(char *str, int i, va_list args, t_flag *flag)
 {
 	long long int	num;
 	int				n;

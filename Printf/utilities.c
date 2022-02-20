@@ -6,7 +6,7 @@
 /*   By: dpadrini <dpadrini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 11:46:15 by dpadrini          #+#    #+#             */
-/*   Updated: 2022/02/18 12:33:31 by dpadrini         ###   ########.fr       */
+/*   Updated: 2022/02/20 10:58:10 by dpadrini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	printchar(char c, t_flag *flag)
 
 void	printstr(char *str, t_flag *flag)
 {
-	size_t	len;
+	int	len;
 
 	if (str)
 	{
@@ -75,7 +75,7 @@ void	print_hex(char *s, long long num, int n, t_flag *flag)
 	if (flag->hash && num != 0)
 	{
 		if (*s == 'x')
-			prinstr("0x", flag);
+			printstr("0x", flag);
 		else
 			printstr("0X", flag);
 	}	

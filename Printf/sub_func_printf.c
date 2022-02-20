@@ -6,7 +6,7 @@
 /*   By: dpadrini <dpadrini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 14:39:51 by dpadrini          #+#    #+#             */
-/*   Updated: 2022/02/18 12:31:19 by dpadrini         ###   ########.fr       */
+/*   Updated: 2022/02/20 10:49:30 by dpadrini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	ft_strlen(const char *str)
 
 int	check_n_print(char *str, size_t size, t_flag *flag)
 {
-	int	i;
+	size_t	i;
 
 	i = -1;
 	while (str[size])
@@ -81,7 +81,7 @@ int	look_for_flags(char *str, int i, t_flag *flag)
 			i++;
 		}
 		i++;
-		flag->type = *s;
+		flag->type = *str;
 	}
 	return (i);
 }

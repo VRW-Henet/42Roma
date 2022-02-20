@@ -6,7 +6,7 @@
 /*   By: dpadrini <dpadrini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 10:56:45 by dpadrini          #+#    #+#             */
-/*   Updated: 2022/02/18 12:42:15 by dpadrini         ###   ########.fr       */
+/*   Updated: 2022/02/20 10:46:14 by dpadrini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,11 @@ typedef struct s_flag
 
 int		ft_printf(const char *str, ...);
 int		check_flags(char *str, int i, t_flag *flags);
-int		check_for_conversions(char *str, int i, t_flag *flag);
+int		check_for_conversions(char *str, int i, t_flag *flag, va_list args);
 int		print_sc(char *str, int i, va_list args, t_flag *flag);
-int		print_p(char *str, int i, va_list args, t_flag *flag);
-int		print_id(char *str, int i, va_list args, t_flag *flags);
-int		print_u(char *str, int i, va_list args, t_flag *flags);
+int		print_p(int i, va_list args, t_flag *flag);
+int		print_id(int i, va_list args, t_flag *flags);
+int		print_u(int i, va_list args, t_flag *flags);
 int		print_x(char *str, int i, va_list args, t_flag *flags);
 void	flags_at_zero(t_flag *flag, int io);
 int		ft_strlen(const char *str);
@@ -54,5 +54,6 @@ void	printstr(char *str, t_flag *flag);
 void	print_stuff(int n, t_flag *flag, int io);
 void	printsymbol(int num, int n, t_flag *flag);
 void	print_hex(char *s, long long num, int n, t_flag *flag);
+char	*ft_strchr(const char *s, int c);
 
 #endif
