@@ -6,7 +6,7 @@
 /*   By: dpadrini <dpadrini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 10:09:50 by dpadrini          #+#    #+#             */
-/*   Updated: 2022/02/20 10:44:33 by dpadrini         ###   ########.fr       */
+/*   Updated: 2022/02/20 12:34:25 by dpadrini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,10 @@ int	check_flags(char *str, int i, t_flag *flag)
 	else if (str[i] == '.')
 	{
 		flag->poin = 1;
-		while (ft_isdigit(str[i + 1]))
+		while (ft_isdigit(str[i++]))
 		{
 			flag->prec = (flag->prec * 10) + (str[i] - 48);
 			flag->leng++;
-			i++;
 		}
 	}
 	else if (str[i] == '#')
