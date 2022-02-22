@@ -6,7 +6,7 @@
 /*   By: dpadrini <dpadrini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 16:53:34 by dpadrini          #+#    #+#             */
-/*   Updated: 2022/02/18 14:05:24 by dpadrini         ###   ########.fr       */
+/*   Updated: 2022/02/22 10:38:54 by dpadrini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	ft_printf(const char *str, ...)
 	{
 		flags_at_zero(flag, 0);
 		i = check_n_print(s, i, flag);
-		i = look_for_flags(s, i, flag) + 1;
+		i = look_for_flags(s, i, flag);
 		i = check_for_conversions(s, i, flag, args);
 		flags_at_zero(flag, 1);
 	}

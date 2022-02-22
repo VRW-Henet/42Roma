@@ -6,27 +6,46 @@
 /*   By: dpadrini <dpadrini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 10:55:29 by dpadrini          #+#    #+#             */
-/*   Updated: 2022/02/20 10:37:06 by dpadrini         ###   ########.fr       */
+/*   Updated: 2022/02/22 11:44:57 by dpadrini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	print_sc(char *str, int i, va_list args, t_flag *flag)
+int	print_c(int i, va_list args, t_flag *flag)
 {
-	int		len;
-	char	*s;
+	char	ch;
 
-	s = va_arg(args, char *);
-	len = ft_strlen(s);
+	ch = va_arg(args, int);
+	if (flag->widt && !flag->minu)
+	{
+		print_stuff(flag->widt - 1, flag, 1);
+		printchar(ch, flag);
+	}
+	else if (flag->widt && flag->minu)
+	{
+		printchar(ch, flag);
+		print_stuff(flag->widt - 1, flag, 1);
+	}
+	else
+		printchar(ch, flag);
+	i++;
+	return (i);
+}
+
+int	print_s(int i, char *args, t_flag *flag)
+{
+	int	len;
+
+	len = pf_strlen(args);
 	if (args == NULL)
 		len = 6;
-	if (str[i] == 's' && flag->poin && flag->prec < len)
+	if (flag->poin && flag->prec < len)
 		len = flag->prec;
 	if (flag->widt && !flag->minu)
 		print_stuff(flag->widt - len, flag, 1);
 	if (args != NULL)
-		printstr(s, flag);
+		printstr(args, flag);
 	else
 		printstr("(null)", flag);
 	if (flag->widt && flag->minu)
@@ -74,7 +93,7 @@ int	print_id(int i, va_list args, t_flag *flag)
 	if (flag->poin && flag->prec == 0 && num == 0)
 		n = 0;
 	printsymbol(num, n, flag);
-	ft_putnbr(num, flag);
+	pf_putnbr(num, flag);
 	if (flag->widt && flag->minu)
 		print_stuff(flag->widt - n, flag, 1);
 	return (++i);
@@ -101,31 +120,11 @@ int	print_u(int i, va_list args, t_flag *flag)
 		printchar(' ', flag);
 	if (flag->prec > len_num(num))
 		print_stuff(flag->prec - len_num(num), flag, 0);
-	ft_putnbr(num, flag);
+	pf_putnbr(num, flag);
 	if (flag->widt && flag->minu)
 		print_stuff(flag->widt - n, flag, 1);
 	i++;
 	return (i);
 }
 
-int	print_x(char *str, int i, va_list args, t_flag *flag)
-{
-	long long int	num;
-	int				n;
-
-	num = (long long int)va_arg(args, unsigned int);
-	n = len_num_hex(num);
-	if (((flag->plus || flag->spce) && num >= 0) || num < 0)
-		n++;
-	if (flag->prec > n)
-		n = flag->prec;
-	if (num < 0 && flag->prec >= n)
-		n = flag->prec + 1;
-	if (flag->poin && flag->prec == 0 && num == 0)
-		n = 0;
-	print_hex(str, num, n, flag);
-	ft_putnbr_hex(*str, num, flag);
-	if (flag->widt && flag->minu)
-		print_stuff(flag->widt - n, flag, 1);
-	return (i++);
-}
+/* Print_x is in Chrchecker due to normes */

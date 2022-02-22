@@ -6,13 +6,13 @@
 /*   By: dpadrini <dpadrini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 11:53:16 by dpadrini          #+#    #+#             */
-/*   Updated: 2022/02/20 10:52:31 by dpadrini         ###   ########.fr       */
+/*   Updated: 2022/02/22 10:09:13 by dpadrini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_isdigit(int c)
+int	pf_isdigit(int c)
 {
 	if (c >= '0' && c <= '9')
 		return (1);
@@ -55,7 +55,7 @@ int	len_num_hex(unsigned long n)
 	return (result);
 }
 
-int	ft_putnbr(long long int n, t_flag *flag)
+int	pf_putnbr(long long int n, t_flag *flag)
 {
 	char	result[18];
 	int		i;

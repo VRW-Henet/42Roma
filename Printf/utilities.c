@@ -6,7 +6,7 @@
 /*   By: dpadrini <dpadrini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 11:46:15 by dpadrini          #+#    #+#             */
-/*   Updated: 2022/02/20 10:58:10 by dpadrini         ###   ########.fr       */
+/*   Updated: 2022/02/22 09:35:44 by dpadrini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	printstr(char *str, t_flag *flag)
 
 	if (str)
 	{
-		len = ft_strlen(str);
+		len = pf_strlen(str);
 		if (flag->poin && flag->prec < len && flag->type == 's')
 			len = flag->prec;
 		write(1, str, len);

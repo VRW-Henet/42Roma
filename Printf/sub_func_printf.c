@@ -6,7 +6,7 @@
 /*   By: dpadrini <dpadrini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 14:39:51 by dpadrini          #+#    #+#             */
-/*   Updated: 2022/02/20 11:52:19 by dpadrini         ###   ########.fr       */
+/*   Updated: 2022/02/22 11:40:13 by dpadrini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ t_flag	flags_at_zero(t_flag *flag, int io)
 	return (*flag);
 }
 
-int	ft_strlen(const char *str)
+int	pf_strlen(const char *str)
 {
 	int	i;
 
@@ -71,23 +71,26 @@ int	check_n_print(char *str, int size, t_flag *flag)
 
 int	look_for_flags(char *str, int i, t_flag *flag)
 {
-	while (!ft_strchr("cspdiuxX%", str[i]))
+	while (!pf_strchr("cspdiuxX%", str[i]))
 	{
 		i = check_flags(str, i, flag);
+		if (!flag->poin)
+		{
+			while (pf_isdigit(str[i]))
+			{
+				flag->widt = (flag->widt * 10) + (str[i] - 48);
+				i++;
+			}
+		}
 		if (flag->minu || flag->poin)
 			flag->zero = 0;
-		while (ft_isdigit(str[i]))
-		{
-			flag->widt = (flag->widt * 10) + (str[i] - 48);
-			i++;
-		}
 		i++;
 		flag->type = *str;
 	}
 	return (i);
 }
 
-void	ft_putnbr_hex(char ch, long long int num, t_flag *flag)
+void	pf_putnbr_hex(char ch, long long int num, t_flag *flag)
 {
 	char	result[18];
 	int		i;
