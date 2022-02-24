@@ -6,7 +6,7 @@
 /*   By: dpadrini <dpadrini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 10:09:50 by dpadrini          #+#    #+#             */
-/*   Updated: 2022/02/22 11:06:22 by dpadrini         ###   ########.fr       */
+/*   Updated: 2022/02/23 23:58:31 by dpadrini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	check_flags(char *str, int i, t_flag *flag)
 	else if (str[i] == '.')
 	{
 		flag->poin = 1;
-		while (pf_isdigit(str[i++]))
+		while (pf_isdigit(str[++i]))
 		{
 			flag->prec = (flag->prec * 10) + (str[i] - 48);
 			flag->leng++;
@@ -39,7 +39,7 @@ int	check_flags(char *str, int i, t_flag *flag)
 int	check_for_conversions(char *str, int i, t_flag *flag, va_list args)
 {
 	if (str[i] == 'c')
-		return (print_c(i, args, flag));
+		return (print_c(i, va_arg(args, int), flag));
 	else if (str[i] == 's')
 		return (print_s(i, va_arg(args, char *), flag));
 	else if (str[i] == 'p')
@@ -50,12 +50,6 @@ int	check_for_conversions(char *str, int i, t_flag *flag, va_list args)
 		return (print_u(i, args, flag));
 	else if (str[i] == 'x' || str[i] == 'X')
 		return (print_x(str, i, args, flag));
-	else if (str[i] == '%')
-	{
-		printchar('%', flag);
-		i++;
-		return (i);
-	}
 	return (i);
 }
 
@@ -76,10 +70,10 @@ char	*pf_strchr(const char *s, int c)
 /* Right from conversions */
 int	print_x(char *str, int i, va_list args, t_flag *flag)
 {
-	long long int	num;
-	int				n;
+	long long	num;
+	int			n;
 
-	num = (long long int)va_arg(args, unsigned int);
+	num = (long long)va_arg(args, unsigned int);
 	n = len_num_hex(num);
 	if (((flag->plus || flag->spce) && num >= 0) || num < 0)
 		n++;
@@ -89,9 +83,10 @@ int	print_x(char *str, int i, va_list args, t_flag *flag)
 		n = flag->prec + 1;
 	if (flag->poin && flag->prec == 0 && num == 0)
 		n = 0;
-	print_hex(str, num, n, flag);
-	pf_putnbr_hex(*str, num, flag);
+	print_hex(str[i], num, n, flag);
+	pf_putnbr_hex(str[i], num, flag);
 	if (flag->widt && flag->minu)
 		print_stuff(flag->widt - n, flag, 1);
-	return (i++);
+	i++;
+	return (i);
 }

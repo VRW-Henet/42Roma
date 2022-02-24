@@ -6,20 +6,20 @@
 /*   By: dpadrini <dpadrini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 10:55:29 by dpadrini          #+#    #+#             */
-/*   Updated: 2022/02/22 11:44:57 by dpadrini         ###   ########.fr       */
+/*   Updated: 2022/02/24 01:42:51 by dpadrini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	print_c(int i, va_list args, t_flag *flag)
+int	print_c(int i, int c, t_flag *flag)
 {
 	char	ch;
 
-	ch = va_arg(args, int);
+	ch = (char) c;
 	if (flag->widt && !flag->minu)
 	{
-		print_stuff(flag->widt - 1, flag, 1);
+		print_stuff(flag->widt - 1 , flag, 1);
 		printchar(ch, flag);
 	}
 	else if (flag->widt && flag->minu)
@@ -96,7 +96,8 @@ int	print_id(int i, va_list args, t_flag *flag)
 	pf_putnbr(num, flag);
 	if (flag->widt && flag->minu)
 		print_stuff(flag->widt - n, flag, 1);
-	return (++i);
+	i++;
+	return (i);
 }
 
 int	print_u(int i, va_list args, t_flag *flag)

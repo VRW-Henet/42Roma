@@ -6,7 +6,7 @@
 /*   By: dpadrini <dpadrini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 11:46:15 by dpadrini          #+#    #+#             */
-/*   Updated: 2022/02/22 09:35:44 by dpadrini         ###   ########.fr       */
+/*   Updated: 2022/02/23 20:48:16 by dpadrini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	printsymbol(int num, int n, t_flag *flag)
 		print_stuff(flag->prec - len_num(num), flag, 0);
 }
 
-void	print_hex(char *s, long long num, int n, t_flag *flag)
+void	print_hex(char c, long long num, int n, t_flag *flag)
 {
 	if (num < 0 && (flag->zero || flag->poin))
 		printchar('-', flag);
@@ -74,7 +74,7 @@ void	print_hex(char *s, long long num, int n, t_flag *flag)
 		print_stuff(flag->prec - len_num_hex(num), flag, 0);
 	if (flag->hash && num != 0)
 	{
-		if (*s == 'x')
+		if (c == 'x')
 			printstr("0x", flag);
 		else
 			printstr("0X", flag);

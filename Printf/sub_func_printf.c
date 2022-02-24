@@ -6,7 +6,7 @@
 /*   By: dpadrini <dpadrini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 14:39:51 by dpadrini          #+#    #+#             */
-/*   Updated: 2022/02/22 11:40:13 by dpadrini         ###   ########.fr       */
+/*   Updated: 2022/02/24 02:31:03 by dpadrini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,27 +44,27 @@ int	check_n_print(char *str, int size, t_flag *flag)
 {
 	int	i;
 
-	i = -1;
+	i = size;
 	while (str[size])
 	{
 		if (str[size] == '%' && str[size + 1] != '%')
-		{
-			size++;
 			break ;
-		}
 		if (str[size] == '%')
 			size++;
 		size++;
 	}
-	while (i++ <= size && str[i])
+	while (i < size && str[i])
 	{
 		if (str[i] == '%' && str[i + 1] == '%')
 		{
 			printchar('%', flag);
+			i += 2;
+		}
+		else
+		{
+			printchar(str[i], flag);
 			i++;
 		}
-		else if (str[i] != '%')
-			printchar(str[i], flag);
 	}
 	return (size);
 }
@@ -85,12 +85,12 @@ int	look_for_flags(char *str, int i, t_flag *flag)
 		if (flag->minu || flag->poin)
 			flag->zero = 0;
 		i++;
-		flag->type = *str;
+		flag->type = str[i];
 	}
 	return (i);
 }
 
-void	pf_putnbr_hex(char ch, long long int num, t_flag *flag)
+void	pf_putnbr_hex(char ch, long long num, t_flag *flag)
 {
 	char	result[18];
 	int		i;
@@ -105,10 +105,10 @@ void	pf_putnbr_hex(char ch, long long int num, t_flag *flag)
 		base = "0123456789abcdef";
 	else
 		base = "0123456789ABCDEF";
-	while (num)
+	while ((unsigned int) num)
 	{
-		result[i] = base[num % 16];
-		num = num / 16;
+		result[i] = base[(unsigned int) num % 16];
+		num = (unsigned int) num / 16;
 		i++;
 	}
 	i--;

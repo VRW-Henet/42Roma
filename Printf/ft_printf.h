@@ -6,7 +6,7 @@
 /*   By: dpadrini <dpadrini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 10:56:45 by dpadrini          #+#    #+#             */
-/*   Updated: 2022/02/22 10:08:51 by dpadrini         ###   ########.fr       */
+/*   Updated: 2022/02/23 21:44:22 by dpadrini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ typedef struct s_flag
 int		ft_printf(const char *str, ...);
 int		check_flags(char *str, int i, t_flag *flags);
 int		check_for_conversions(char *str, int i, t_flag *flag, va_list args);
-int		print_c(int i, va_list args, t_flag *flag);
+int		print_c(int i, int c, t_flag *flag);
 int		print_s(int i, char *args, t_flag *flag);
 int		print_p(int i, va_list args, t_flag *flag);
 int		print_id(int i, va_list args, t_flag *flags);
@@ -54,7 +54,7 @@ void	printchar(char c, t_flag *flag);
 void	printstr(char *str, t_flag *flag);
 void	print_stuff(int n, t_flag *flag, int io);
 void	printsymbol(int num, int n, t_flag *flag);
-void	print_hex(char *s, long long num, int n, t_flag *flag);
+void	print_hex(char c, long long num, int n, t_flag *flag);
 char	*pf_strchr(const char *s, int c);
 
 #endif
