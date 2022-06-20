@@ -6,7 +6,7 @@
 /*   By: dpadrini <dpadrini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 14:38:15 by dpadrini          #+#    #+#             */
-/*   Updated: 2022/05/20 11:48:17 by dpadrini         ###   ########.fr       */
+/*   Updated: 2022/06/06 18:38:19 by dpadrini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ int	sl_map_width(char *selected_map, int fd)
 
 	width = 0;
 	result = get_next_line(fd);
+	free(result);
 	width = ft_strlen(result) - 1;
 	sl_err_alignement(fd, width);
 	if (width < 3)

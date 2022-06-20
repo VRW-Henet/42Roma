@@ -6,7 +6,7 @@
 /*   By: dpadrini <dpadrini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 10:56:45 by dpadrini          #+#    #+#             */
-/*   Updated: 2022/05/24 12:27:52 by dpadrini         ###   ########.fr       */
+/*   Updated: 2022/06/20 11:53:46 by dpadrini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdarg.h>
-# include <../libft.h>
+# include "../libft.h"
 
 typedef struct s_flag
 {

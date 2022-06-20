@@ -6,7 +6,7 @@
 /*   By: dpadrini <dpadrini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 10:41:34 by dpadrini          #+#    #+#             */
-/*   Updated: 2022/05/24 12:27:55 by dpadrini         ###   ########.fr       */
+/*   Updated: 2022/06/20 11:46:53 by dpadrini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 
 # include <unistd.h>
 # include <stdlib.h>
-# include <Printf/ft_printf.h>
-# include <GetNextLine/get_next_line.h>
+# include "Printf/ft_printf.h"
+# include "GetNextLine/get_next_line.h"
 
 typedef struct s_list
 {

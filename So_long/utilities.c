@@ -6,7 +6,7 @@
 /*   By: dpadrini <dpadrini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 12:04:34 by dpadrini          #+#    #+#             */
-/*   Updated: 2022/05/24 12:44:39 by dpadrini         ###   ########.fr       */
+/*   Updated: 2022/06/06 17:29:51 by dpadrini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,8 @@ void	sl_open_images(t_game *map)
 	map->images.img_wall = mlx_xpm_file_to_image \
 		(map->mlx, "img/Wall.xpm", &map->images.img_width, \
 		&map->images.img_height);
-	map->images.img_player = mlx_xpm_file_to_image \
+	if ()
+		map->images.img_player = mlx_xpm_file_to_image \
 		(map->mlx, "img/Traveler.xpm", &map->images.img_width, \
 		&map->images.img_height);
 	map->images.img_enemy = mlx_xpm_file_to_image \
@@ -85,7 +86,7 @@ void	sl_print_map(t_game *map)
 		mlx_string_put(map->mlx, map->win, 9, 16, 0x0000ff, "STEPS--> ");
 		mlx_string_put(map->mlx, map->win, 100, 16, 0x0000ff, moves);
 	}
-	mlx_put_images_to_window(mmaop->ml, map->win, map->images.player, \
+	mlx_put_images_to_window(map->mlx, map->win, map->images.player, \
 	map->x_player * 64, map->y_player * 64);
 	free(moves);
 }

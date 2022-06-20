@@ -6,7 +6,7 @@
 /*   By: dpadrini <dpadrini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 13:41:24 by dpadrini          #+#    #+#             */
-/*   Updated: 2022/01/17 11:56:28 by dpadrini         ###   ########.fr       */
+/*   Updated: 2022/06/20 12:08:41 by dpadrini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,7 @@ char	*ft_strchr(const char *s, int c)
 
 	i = 0;
 	while (s[i] && s[i] != (char)c)
-	{
 		i++;
-	}
 	if (s[i] == (char)c)
 		return ((char *)(s + i));
 	return (NULL);

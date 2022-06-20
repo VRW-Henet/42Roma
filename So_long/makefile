@@ -6,7 +6,7 @@
 #    By: dpadrini <dpadrini@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/05 12:55:07 by dpadrini          #+#    #+#              #
-#    Updated: 2022/05/24 12:13:10 by dpadrini         ###   ########.fr        #
+#    Updated: 2022/06/20 11:49:46 by dpadrini         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,8 @@ SRC = so_long.c \
 	map_reader.c \
 	map_utilities.c \
 	sl_checker.c \
-	utilities.c
+	utilities.c \
+	movements.c
 
 GNL = GetNextLine/get_next_line.c GetNextLine/get_next_line_utils.c
 

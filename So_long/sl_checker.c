@@ -6,7 +6,7 @@
 /*   By: dpadrini <dpadrini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 13:42:27 by dpadrini          #+#    #+#             */
-/*   Updated: 2022/05/20 12:14:19 by dpadrini         ###   ########.fr       */
+/*   Updated: 2022/06/20 13:50:27 by dpadrini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,15 +29,15 @@ int	sl_check_char(t_game *map)
 				map->matrix[y][x] != 'C' && \
 				map->matrix[y][x] != 'P' &&)
 			{
-				sl_errors("Invalid map:\nMap incomplete");
+				sl_errors("Invalid map:\nInvalid tile detected");
 				end_game(map);
-				return (-1);
+				return (0);
 			}
 			x++;
 		}
 		y++;
 	}
-	return (0);
+	return (1);
 }
 
 int	sl_check_perimeter_y(t_game *map)
@@ -53,8 +53,8 @@ int	sl_check_perimeter_y(t_game *map)
 		map->height > y)
 		y++;
 	if (y != map->height)
-		return (-1);
-	return (0);
+		return (0);
+	return (1);
 }
 
 int	sl_check_perimeter_x(t_game *map)
@@ -71,8 +71,8 @@ int	sl_check_perimeter_x(t_game *map)
 		map->width > x)
 		y++;
 	if (x != map->width)
-		return (-1);
-	return (0);
+		return (0);
+	return (1);
 }
 
 int	sl_check_values(t_game map, int x, int y)
@@ -105,7 +105,7 @@ int	sl_check_inside(t_game *map)
 	{
 		sl_errors("Corrupted map\nExpected different values");
 		end_game(map);
-		return (-1);
+		return (0);
 	}
-	return (0);
+	return (1);
 }
