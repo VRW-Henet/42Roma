@@ -6,7 +6,7 @@
 #    By: dpadrini <dpadrini@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/05 12:55:07 by dpadrini          #+#    #+#              #
-#    Updated: 2022/06/20 11:49:46 by dpadrini         ###   ########.fr        #
+#    Updated: 2022/06/28 17:04:36 by dpadrini         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,35 +21,45 @@ SRC = so_long.c \
 	map_utilities.c \
 	sl_checker.c \
 	utilities.c \
-	movements.c
+	movements.c \
+	animation.c
 
-GNL = GetNextLine/get_next_line.c GetNextLine/get_next_line_utils.c
+GNL = Libft/GetNextLine/GetNextLine.a
 
-PF = Printf/chrchecker.c \
-		Printf/conversions.c \
-		Printf/ft_printf.c \
-		Printf/sub_func_printf.c \
-		Printf/utilities.c \
-		Printf/utilities_b.c \
+PF = Libft/Printf/libftprintf.a
 
-FT_PRINTF_A = libftprintf.a
+LIBFT = Libft/libft.a
 
-LIBFT_A = libft.a
+LIBS = $(LIBFT) $(PF) $(GNL)
 
 OBJ = $(SRC:.c=.o)
 
-ANAME = $(NAME).a
+$(NAME) : $(OBJ) so_long.h
+		$(CC) $(FLAGS) $(OBJ) -lmlx -framework OpenGL -framework AppKit $(LIBS) -o $(NAME)
 
-%.o: %.c 
+%.o: %.c
 		$(CC) ${CFLAGS} -c $< -o $@
 
-$(ANAME) : $(OBJ)
-		ar -rc $(OBJ) $(B_OBJ)
+$(LIBFT): Libft/ 
+	make -C libft
+
+$(GNL): Libft/GetNextLine/
+	make -C Libft/GetNextLine
+
+$(PF): libft/Printf/
+	make -C Libft/Printf
+
+all: $(LIBFT) $(PF) $(GNL) $(NAME)
+
+clean: 
+	rm -f $(OBJ)
 
 fclean: clean 
-		rm -f $(ANAME)
-		rm -f Printf/*.o
-		rm -f GetNextLine/*.o
+		rm -f $(OBJ)
+		make fclean -C libft 
+		make fclean -C libft/Printf
+		make fclean -C libft/GetNextLine
+		rm -f so_long
 
 re: fclean all
 

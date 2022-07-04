@@ -6,13 +6,13 @@
 /*   By: dpadrini <dpadrini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 11:14:06 by dpadrini          #+#    #+#             */
-/*   Updated: 2022/05/10 13:03:08 by dpadrini         ###   ########.fr       */
+/*   Updated: 2022/06/24 10:58:31 by dpadrini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	gnl_get_line(char *save)
+char	*gnl_get_line(char *save)
 {
 	int		i;
 	char	*s;
@@ -100,7 +100,7 @@ char	*get_next_line(int fd)
 	save[fd] = gnl_read_and_save(fd, save[fd]);
 	if (!save[fd])
 		return (NULL);
-	line =gnl_get_line(save[fd]);
+	line = gnl_get_line(save[fd]);
 	save[fd] = gnl_save(save[fd]);
 	return (line);
 }

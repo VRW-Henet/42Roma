@@ -6,7 +6,7 @@
 #    By: dpadrini <dpadrini@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/15 14:15:34 by dpadrini          #+#    #+#              #
-#    Updated: 2022/05/13 14:54:36 by dpadrini         ###   ########.fr        #
+#    Updated: 2022/06/22 14:34:42 by dpadrini         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -77,9 +77,11 @@ all: $(NAME)
 
 clean:
 	rm -f $(OBJS) $(BONUS_OBJS)
+	rm -f $(NAME)
 
 fclean: clean
-	rm -f *~ $(NAME)
+	rm -f $(OBJ)
+	rm -f $(NAME)
 
 re: fclean all
 
