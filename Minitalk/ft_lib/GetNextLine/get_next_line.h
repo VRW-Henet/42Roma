@@ -1,31 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minitalk.h                                         :+:      :+:    :+:   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dpadrini <dpadrini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/06 12:22:11 by dpadrini          #+#    #+#             */
-/*   Updated: 2022/07/20 11:13:14 by dpadrini         ###   ########.fr       */
+/*   Created: 2022/04/06 11:14:46 by dpadrini          #+#    #+#             */
+/*   Updated: 2022/06/24 10:06:37 by dpadrini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINITALK_H
-# define MINITALK_H
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
 
-# include "ft_lib/libft.h"
-# include <signal.h>
-# include <unistd.h>
 # include <stdlib.h>
-# include <stdio.h>
+# include <unistd.h>
+# include "../libft.h"
 
-/* client */
-void	mt_error(void);
-void	mt_ping(int signal);
-void	mt_send_string(char *str, int pid);
-void	mt_end(int pid);
-
-/*server */
-void	mt_print_str(int sig, siginfo_t *info, void *context);
+size_t	gnl_strlen(char *str);
+char	*gnl_strchr(char *s, int c);
+char	*gnl_strjoin(char *s1, char *s2);
+char	*get_next_line(int fd);
+char	*gnl_get_line(char *save);
+char	*gnl_save(char *save);
+char	*gnl_read_and_save(int fd, char *save);
 
 #endif

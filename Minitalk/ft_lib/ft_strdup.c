@@ -1,31 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minitalk.h                                         :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dpadrini <dpadrini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/06 12:22:11 by dpadrini          #+#    #+#             */
-/*   Updated: 2022/07/20 11:13:14 by dpadrini         ###   ########.fr       */
+/*   Created: 2022/01/15 17:43:39 by dpadrini          #+#    #+#             */
+/*   Updated: 2022/01/18 22:22:54 by dpadrini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINITALK_H
-# define MINITALK_H
+#include "libft.h"
 
-# include "ft_lib/libft.h"
-# include <signal.h>
-# include <unistd.h>
-# include <stdlib.h>
-# include <stdio.h>
+char	*ft_strdup(const char *s1)
+{
+	size_t	len;
+	char	*cpy;
+	int		i;
 
-/* client */
-void	mt_error(void);
-void	mt_ping(int signal);
-void	mt_send_string(char *str, int pid);
-void	mt_end(int pid);
-
-/*server */
-void	mt_print_str(int sig, siginfo_t *info, void *context);
-
-#endif
+	len = ft_strlen(s1) + 1;
+	cpy = malloc(sizeof(*s1) * (len));
+	if (!cpy)
+		return (NULL);
+	i = 0;
+	if (!s1)
+	{
+		return (NULL);
+	}
+	while (s1[i])
+	{
+		cpy[i] = s1[i];
+		i++;
+	}
+	cpy[i] = '\0';
+	return (cpy);
+}

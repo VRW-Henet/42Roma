@@ -1,31 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minitalk.h                                         :+:      :+:    :+:   */
+/*   ft_isalnum.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dpadrini <dpadrini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/06 12:22:11 by dpadrini          #+#    #+#             */
-/*   Updated: 2022/07/20 11:13:14 by dpadrini         ###   ########.fr       */
+/*   Created: 2022/01/11 10:49:43 by dpadrini          #+#    #+#             */
+/*   Updated: 2022/01/17 15:56:32 by dpadrini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINITALK_H
-# define MINITALK_H
+#include "libft.h"
 
-# include "ft_lib/libft.h"
-# include <signal.h>
-# include <unistd.h>
-# include <stdlib.h>
-# include <stdio.h>
-
-/* client */
-void	mt_error(void);
-void	mt_ping(int signal);
-void	mt_send_string(char *str, int pid);
-void	mt_end(int pid);
-
-/*server */
-void	mt_print_str(int sig, siginfo_t *info, void *context);
-
-#endif
+int	ft_isalnum(int c)
+{
+	if (48 <= c && c <= 57)
+		return (1);
+	else if ((65 <= c && c <= 90) || (97 <= c && c <= 122))
+		return (1);
+	return (0);
+}

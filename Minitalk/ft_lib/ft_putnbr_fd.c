@@ -1,31 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minitalk.h                                         :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dpadrini <dpadrini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/06 12:22:11 by dpadrini          #+#    #+#             */
-/*   Updated: 2022/07/20 11:13:14 by dpadrini         ###   ########.fr       */
+/*   Created: 2022/01/24 14:25:33 by dpadrini          #+#    #+#             */
+/*   Updated: 2022/01/24 15:00:31 by dpadrini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINITALK_H
-# define MINITALK_H
+#include "libft.h"
 
-# include "ft_lib/libft.h"
-# include <signal.h>
-# include <unistd.h>
-# include <stdlib.h>
-# include <stdio.h>
-
-/* client */
-void	mt_error(void);
-void	mt_ping(int signal);
-void	mt_send_string(char *str, int pid);
-void	mt_end(int pid);
-
-/*server */
-void	mt_print_str(int sig, siginfo_t *info, void *context);
-
-#endif
+void	ft_putnbr_fd(int n, int fd)
+{
+	if (n == -2147483648)
+	{
+		write(fd, "-2147483648", 11);
+		return ;
+	}
+	else if (n < 0)
+	{
+		n *= -1;
+		ft_putchar_fd('-', fd);
+	}
+	if (n > 9)
+	{	
+		ft_putnbr_fd(n / 10, fd);
+		ft_putnbr_fd(n % 10, fd);
+	}
+	else
+		ft_putchar_fd(n + '0', fd);
+}

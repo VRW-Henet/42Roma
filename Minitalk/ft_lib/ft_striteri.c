@@ -1,31 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minitalk.h                                         :+:      :+:    :+:   */
+/*   ft_striteri.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dpadrini <dpadrini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/06 12:22:11 by dpadrini          #+#    #+#             */
-/*   Updated: 2022/07/20 11:13:14 by dpadrini         ###   ########.fr       */
+/*   Created: 2022/01/24 11:39:21 by dpadrini          #+#    #+#             */
+/*   Updated: 2022/01/24 12:19:25 by dpadrini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINITALK_H
-# define MINITALK_H
+#include "libft.h"
 
-# include "ft_lib/libft.h"
-# include <signal.h>
-# include <unistd.h>
-# include <stdlib.h>
-# include <stdio.h>
+void	ft_striteri(char *s, void (*f)(unsigned int, char*))
+{
+	size_t	i;
 
-/* client */
-void	mt_error(void);
-void	mt_ping(int signal);
-void	mt_send_string(char *str, int pid);
-void	mt_end(int pid);
-
-/*server */
-void	mt_print_str(int sig, siginfo_t *info, void *context);
-
-#endif
+	if (!s || !f)
+		return ;
+	i = 0;
+	while (s[i])
+	{
+		(*f)(i, s + i);
+		i++;
+	}
+}

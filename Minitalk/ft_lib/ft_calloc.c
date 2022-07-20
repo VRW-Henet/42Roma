@@ -1,31 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minitalk.h                                         :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dpadrini <dpadrini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/06 12:22:11 by dpadrini          #+#    #+#             */
-/*   Updated: 2022/07/20 11:13:14 by dpadrini         ###   ########.fr       */
+/*   Created: 2022/01/15 14:25:07 by dpadrini          #+#    #+#             */
+/*   Updated: 2022/01/24 13:43:21 by dpadrini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINITALK_H
-# define MINITALK_H
+#include "libft.h"
 
-# include "ft_lib/libft.h"
-# include <signal.h>
-# include <unistd.h>
-# include <stdlib.h>
-# include <stdio.h>
+void	*ft_calloc(size_t count, size_t size)
+{
+	void	*ptr;
 
-/* client */
-void	mt_error(void);
-void	mt_ping(int signal);
-void	mt_send_string(char *str, int pid);
-void	mt_end(int pid);
-
-/*server */
-void	mt_print_str(int sig, siginfo_t *info, void *context);
-
-#endif
+	ptr = malloc(size * count);
+	if (!ptr)
+		return (NULL);
+	ft_bzero(ptr, count * size);
+	return (ptr);
+}

@@ -1,31 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minitalk.h                                         :+:      :+:    :+:   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dpadrini <dpadrini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/06 12:22:11 by dpadrini          #+#    #+#             */
-/*   Updated: 2022/07/20 11:13:14 by dpadrini         ###   ########.fr       */
+/*   Created: 2022/01/11 17:56:53 by dpadrini          #+#    #+#             */
+/*   Updated: 2022/01/27 12:52:49 by dpadrini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINITALK_H
-# define MINITALK_H
+#include "libft.h"
 
-# include "ft_lib/libft.h"
-# include <signal.h>
-# include <unistd.h>
-# include <stdlib.h>
-# include <stdio.h>
+void	*ft_memmove(void *dst, const void *src, size_t len)
+{
+	size_t	i;
+	char	*dstc;
+	char	*srcc;
 
-/* client */
-void	mt_error(void);
-void	mt_ping(int signal);
-void	mt_send_string(char *str, int pid);
-void	mt_end(int pid);
-
-/*server */
-void	mt_print_str(int sig, siginfo_t *info, void *context);
-
-#endif
+	i = 0;
+	dstc = (char *)dst;
+	srcc = (char *)src;
+	if (!dstc && !srcc)
+		return (NULL);
+	if (dstc > srcc)
+	{
+		while (len-- > 0)
+			dstc[len] = srcc[len];
+	}
+	else
+	{
+		while (i < len)
+		{
+			dstc[i] = srcc[i];
+			i++;
+		}
+	}
+	return (dst);
+}

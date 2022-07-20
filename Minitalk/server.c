@@ -6,7 +6,7 @@
 /*   By: dpadrini <dpadrini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/15 15:19:24 by dpadrini          #+#    #+#             */
-/*   Updated: 2022/07/18 11:08:13 by dpadrini         ###   ########.fr       */
+/*   Updated: 2022/07/20 14:33:11 by dpadrini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,9 @@ int	main(void)
 	struct sigaction	sig;
 
 	process_id = getpid();
-	ft_putstr_fd("The server PID: > ", 1);
-	ft_putnbr_fd(process_id, 1);
-	ft_putstr_fd("<\n", 1);
+	ft_printf("Server PID: > ");
+	ft_printf("%d", process_id);
+	ft_printf(" <\n");
 	sig.sa_sigaction = mt_print_str;
 	sig.sa_flags = SA_SIGINFO;
 	sigaction(SIGUSR1, &sig, NULL);

@@ -6,7 +6,7 @@
 /*   By: dpadrini <dpadrini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 12:19:38 by dpadrini          #+#    #+#             */
-/*   Updated: 2022/07/18 12:07:56 by dpadrini         ###   ########.fr       */
+/*   Updated: 2022/07/20 14:33:41 by dpadrini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	mt_send_string(char *str, int pid)
 			if (((str[i] >> bit) & 1) == 0)
 			{
 				if (kill(pid, SIGUSR1) == -1)
-					mt_errorr();
+					mt_error();
 			}
 			else if (kill(pid, SIGUSR2) == -1)
 				mt_error();
@@ -65,7 +65,7 @@ void	mt_end(int pid)
 	}
 }
 
-int	main(int argc, char **argv)
+int	main(int ac, char **av)
 {
 	int	i;
 	int	pid;
@@ -82,11 +82,12 @@ int	main(int argc, char **argv)
 		}
 		pid = ft_atoi(av[1]);
 		signal(SIGUSR2, mt_ping);
+		av[2] = ft_strjoin(av[2], "\n");
 		mt_send_string(av[2], pid);
 		while (1)
 			pause();
 	}
-	ft_putstr_fd("-> Error <-\n", 1);
-	ft_putstr_fd("-> Usage: ./client server_PID string <-\n", 1);
+	ft_printf("-> Error <-\n");
+	ft_printf("-> Usage: ./client server_PID string <-\n");
 	return (0);
 }
