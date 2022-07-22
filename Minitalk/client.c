@@ -6,7 +6,7 @@
 /*   By: dpadrini <dpadrini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 12:19:38 by dpadrini          #+#    #+#             */
-/*   Updated: 2022/07/20 14:33:41 by dpadrini         ###   ########.fr       */
+/*   Updated: 2022/07/22 09:32:23 by dpadrini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	mt_error(void)
 {
-	ft_putstr_fd("-> Error <-\n", 1);
+	ft_printf("-> Error <-\n");
 	exit(1);
 }
 
@@ -22,7 +22,7 @@ void	mt_ping(int signal)
 {
 	if (signal == SIGUSR2)
 	{
-		ft_putstr_fd("input received\n", 1);
+		ft_printf("input received\n");
 		exit (0);
 	}
 }
