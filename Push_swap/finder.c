@@ -1,61 +1,53 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utilities.c                                        :+:      :+:    :+:   */
+/*   finder.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dpadrini <dpadrini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/25 14:44:19 by dpadrini          #+#    #+#             */
-/*   Updated: 2022/10/06 14:27:26 by dpadrini         ###   ########.fr       */
+/*   Created: 2022/10/06 12:40:11 by dpadrini          #+#    #+#             */
+/*   Updated: 2022/10/06 14:13:12 by dpadrini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	ps_error(char *message)
+int	ps_findmin(int *ar, int size)
 {
-	ft_printf("Error\n, '%s\n'", message);
-	exit(1);
+	int	ret;
+
+	ret = ps_findlowest(ps_min(ar, size), ar, size);
+	if (ret == -1)
+		ps_error("not an expected error, check findmin");
+	return (ret);
 }
 
-int	ps_ardup(int *ar, int size)
+int	ps_min(int *ar, int size)
 {
-	int	*copy;
+	int	min;
 	int	i;
 
-	copy = (int *) malloc(sizeof(int) * size);
-	ps_mallok(copy);
-	i = 0;
+	min = ar[0];
+	i = 1;
 	while (i < size)
 	{
-		copy[i] = ar[i];
+		if (ar[i] < min)
+			min = ar[i];
 		i++;
 	}
-	return (copy);
+	return (min);
 }
 
-void	ps_sort_ar(int *ar, int size)
-{
-	int	i;
-
-	i = 0;
-	while (i < size - 1)
-	{
-		if (ar[i] > ar[i + 1])
-			ps_swap(ar + i, ar + (i + 1), size);
-		i++;
-	}
-}
-
-void	ps_freematrix(int **matrix, int size)
+int	ps_findlow(int n, int *ar, int size)
 {
 	int	i;
 
 	i = 0;
 	while (i < size)
 	{
-		free(matrix[i]);
+		if (ar[i] == n)
+			return (i);
 		i++;
 	}
-	free(matrix);
+	return (-1);
 }
