@@ -6,7 +6,7 @@
 /*   By: dpadrini <dpadrini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 14:44:19 by dpadrini          #+#    #+#             */
-/*   Updated: 2022/10/06 14:27:26 by dpadrini         ###   ########.fr       */
+/*   Updated: 2022/10/10 12:12:41 by dpadrini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	ps_error(char *message)
 	exit(1);
 }
 
-int	ps_ardup(int *ar, int size)
+int	*ps_ardup(int *ar, int size)
 {
 	int	*copy;
 	int	i;

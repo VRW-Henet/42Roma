@@ -6,12 +6,13 @@
 #    By: dpadrini <dpadrini@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/25 10:18:05 by dpadrini          #+#    #+#              #
-#    Updated: 2022/10/06 14:45:33 by dpadrini         ###   ########.fr        #
+#    Updated: 2022/10/10 14:37:32 by dpadrini         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = push_swap
-BONUS = checker
+BONUS = bonus
+CC = gcc
 SRC = check_util.c \
 		findcomb.c \
 		finder.c \
@@ -23,7 +24,6 @@ SRC = check_util.c \
 		rotate.c \
 		swaps.c \
 		utilities.c \
-
 
 SRC_CHECKER = checker.c \
 				check_utilis.c \
@@ -37,18 +37,25 @@ SRC_CHECKER = checker.c \
 FLAG = -Wall -Werror -Wextra
 LIBFT = ft_lib/libft.a
 
+OBJ = $(SRC:.c=.o)
+B_OBJ = $(SRC_CHECKER:.c=.o)
+
+$(NAME): $(OBJ) push_swap.h
+		$(CC) $(FLAG) $(OBJ) $(LIBFT) -o $(NAME)
+
 %.o: %.c
 		$(CC) $(CFLAGS) -c $< -o $@
+		
+$(LIBFT): ft_lib/
+		make -C ft_lib
 
-$(NAME): make re -C ft_lib
-		gcc $(FLAG) -o $(NAME) $(SRC) $(LIBFT)
+$(BONUS): $(B_OBJ) push_swap.h
+		$(CC) $(FLAG) $(B_OBJ) $(LIBFT) -o $(NAME)
 
-bonus: make re -C ft_lib
-		gcc $(FLAG) -o $(NAME) $(SRC_CHECKER) $(LIBFT)
+all: $(NAME) $(BONUS)
 
-all: $(NAME) bonus
-
-clean: rm -f (NAME) $(BONUS)
+clean: 
+		rm -f $(OBJ) $(B_OBJ)
 
 fclean: clean
 		make fclean -C ft_lib

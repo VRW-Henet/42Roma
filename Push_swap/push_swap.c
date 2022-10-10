@@ -6,7 +6,7 @@
 /*   By: dpadrini <dpadrini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 13:53:41 by dpadrini          #+#    #+#             */
-/*   Updated: 2022/10/06 14:13:18 by dpadrini         ###   ########.fr       */
+/*   Updated: 2022/10/10 12:46:35 by dpadrini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	ps_sep(t_struct *data)
 		i = 0;
 		while (i < data->size_a)
 		{
-			if (ps_findlowest(ar[i], data->best_ar, data->best_size) == -1)
+			if (ps_findlow(ar[i], data->best_ar, data->best_size) == -1)
 			{
 				if (ar[i] <= average || average < 3)
 				{
@@ -79,11 +79,11 @@ void	ps_resolve(t_struct *data)
 				ps_shift_a(data);
 		else
 			while (data->ar_a[0] != 1)
-				ps_rev_rotate_a(data);
+				ps_rev_shift_a(data);
 	}
 }
 
-int	ps_trasformer(int *ar, int size)
+int	*ps_trasformer(int *ar, int size)
 {
 	int	*temp;
 	int	*copy;
@@ -125,7 +125,7 @@ int	main(int ac, char **av)
 		data.size_a = ac;
 	}
 	if (ps_check_doubles(data.ar_a, data.size_a) != 0)
-		ft_error("doubles detected, check values");
+		ps_error("doubles detected, check values");
 	data.ar_a = ps_trasformer(data.ar_a, data.size_a);
 	ps_resolve(&data);
 	free(data.ar_a);

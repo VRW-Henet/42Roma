@@ -6,7 +6,7 @@
 /*   By: dpadrini <dpadrini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 12:43:03 by dpadrini          #+#    #+#             */
-/*   Updated: 2022/10/06 14:10:14 by dpadrini         ###   ########.fr       */
+/*   Updated: 2022/10/10 12:22:56 by dpadrini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	ps_engine(t_struct *data)
 		if (small.dir_a == 0)
 			ps_shift_r(data);
 		else
-			ps_reverse_shift_r(data);
+			ps_rev_shift_r(data);
 	}
 	while (ar_a[0] != small.na && small.dir_a == 0)
 		ps_shift_a(data);
@@ -75,7 +75,7 @@ void	ps_makestruct(t_shortest *small, t_struct *data, int i)
 		small->count = small->moves_a;
 	else if (small->moves_a > small->moves_b \
 		&& small->dir_a == small->dir_b)
-		small->count == small->moves_b;
+		small->count = small->moves_b;
 	else if (small->dir_a != small->dir_b)
 		small->count = small->moves_b + small->moves_a;
 }
@@ -107,7 +107,7 @@ void	ps_moves(t_struct *data, t_shortest *small)
 		if (data->ar_a[i] < small->nb && data->ar_a[j] > small->nb)
 		{
 			small->na = data->ar_a[j];
-			ps_direction(&small->dir_a, small->moves_a, data->size_a, j);
+			ps_direction(&small->dir_a, &small->moves_a, data->size_a, j);
 			return ;
 		}
 		if (data->ar_a[i] == 1)

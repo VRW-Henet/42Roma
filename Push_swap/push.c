@@ -6,7 +6,7 @@
 /*   By: dpadrini <dpadrini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 14:17:25 by dpadrini          #+#    #+#             */
-/*   Updated: 2022/10/06 14:19:08 by dpadrini         ###   ########.fr       */
+/*   Updated: 2022/10/10 12:47:30 by dpadrini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	ps_push(int *ar_a, int *ar_b, int *size_a, int *size_b)
 	i = *size_b;
 	while (i > 0)
 	{
-		ar_b[i] == ar_b[i - 1];
+		ar_b[i] = ar_b[i - 1];
 		i--;
 	}
 	i = 0;

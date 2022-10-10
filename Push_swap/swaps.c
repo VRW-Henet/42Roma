@@ -6,7 +6,7 @@
 /*   By: dpadrini <dpadrini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 14:23:26 by dpadrini          #+#    #+#             */
-/*   Updated: 2022/10/06 14:26:39 by dpadrini         ###   ########.fr       */
+/*   Updated: 2022/10/10 12:34:25 by dpadrini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,9 @@ void	ps_swap(int *a, int *b, int size)
 	*b = temp;
 }
 
-void	ps_swap_ab(int *ar, int size, char ab)
+void	ps_swap_ab(int *ar, int size, char *ab)
 {
-	if (ab == 1)
-		ft_printf("s%c\n", ab);
+	ft_printf("s%c\n", ab);
 	ps_swap(ar, ar + 1, size);
 }
 

@@ -6,7 +6,7 @@
 /*   By: dpadrini <dpadrini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 12:31:08 by dpadrini          #+#    #+#             */
-/*   Updated: 2022/10/06 12:35:38 by dpadrini         ###   ########.fr       */
+/*   Updated: 2022/10/10 11:41:00 by dpadrini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	ps_mallok(void *ptr)
 		ps_error("malloc failed");
 }
 
-int	ps_limit(char *str)
+void	ps_limit(char *str)
 {
 	long long int	nb;
 	int				i;
