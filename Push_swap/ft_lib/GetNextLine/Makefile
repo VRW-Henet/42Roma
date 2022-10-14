@@ -6,7 +6,7 @@
 #    By: dpadrini <dpadrini@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/22 13:11:29 by dpadrini          #+#    #+#              #
-#    Updated: 2022/07/20 11:01:44 by dpadrini         ###   ########.fr        #
+#    Updated: 2022/10/11 15:40:21 by dpadrini         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,10 +26,7 @@ BSIZE 	= -D BUFFER_SIZE=$(BUFFER)
 OBJ 	= $(SRC:.c=.o)
 
 %.o: %.c
-		$(CC) $(FLAGS) -c $< -o $@
-
-$(OBJ) :
-		$(CC) $(FLAGS) $(BSIZE) -c get_next_line.h $(SRC)
+		$(CC) $(FLAGS) $(BSIZE) -c $< -o $@
 
 $(ANAME): $(OBJ)
 	ar rcs $(ANAME) $(OBJ)

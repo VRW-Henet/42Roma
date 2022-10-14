@@ -1,28 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dpadrini <dpadrini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/06 11:14:46 by dpadrini          #+#    #+#             */
-/*   Updated: 2022/10/11 15:30:19 by dpadrini         ###   ########.fr       */
+/*   Created: 2022/10/11 13:09:34 by dpadrini          #+#    #+#             */
+/*   Updated: 2022/10/11 13:09:36 by dpadrini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include "libft.h"
 
-# include <stdlib.h>
-# include <unistd.h>
-# include "../libft.h"
+int	ft_strcmp(const char *s1, const char *s2)
+{
+	size_t	i;
 
-size_t	gnl_strlen(char *str);
-char	*gnl_strchr(char *s, int c);
-char	*gnl_strjoin(char *s1, char *s2);
-char	*get_next_line(int fd);
-char	*gnl_get_line(char *save);
-char	*gnl_save(char *save);
-char	*gnl_read_and_save(int fd, char *save);
-
-#endif
+	i = 0;
+	if(!s1 || !s2)
+		return (-1);
+	while (s1[i] && s2[i] && s2 && s1[i] == s2[i])
+		i++;
+	return ((unsigned char)*(s1 + i) - (unsigned char)*(s2 + i));
+}

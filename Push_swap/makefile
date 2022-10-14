@@ -6,7 +6,7 @@
 #    By: dpadrini <dpadrini@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/25 10:18:05 by dpadrini          #+#    #+#              #
-#    Updated: 2022/10/10 14:37:32 by dpadrini         ###   ########.fr        #
+#    Updated: 2022/10/11 15:47:59 by dpadrini         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ SRC = check_util.c \
 		utilities.c \
 
 SRC_CHECKER = checker.c \
-				check_utilis.c \
+				check_util.c \
 				init.c \
 				push.c \
 				rev_rotate.c \
@@ -35,22 +35,27 @@ SRC_CHECKER = checker.c \
 				utilities.c
 
 FLAG = -Wall -Werror -Wextra
+
 LIBFT = ft_lib/libft.a
+PRINTF = ft_lib/Printf/libftprintf.a
+GNL = ft_lib/GetNextLine/getnextline.a
+
+LIBS = $(LIBFT) $(PRINTF) $(GNL)
 
 OBJ = $(SRC:.c=.o)
 B_OBJ = $(SRC_CHECKER:.c=.o)
 
-$(NAME): $(OBJ) push_swap.h
-		$(CC) $(FLAG) $(OBJ) $(LIBFT) -o $(NAME)
+$(NAME): $(OBJ) $(LIBS)
+		$(CC) $(FLAG) $(OBJ) $(LIBS) -o $(NAME)
 
-%.o: %.c
-		$(CC) $(CFLAGS) -c $< -o $@
+%.o: %.c push_swap.h
+		$(CC) $(FLAG) -c $< -o $@
 		
-$(LIBFT): ft_lib/
+$(LIBS): ft_lib/
 		make -C ft_lib
 
-$(BONUS): $(B_OBJ) push_swap.h
-		$(CC) $(FLAG) $(B_OBJ) $(LIBFT) -o $(NAME)
+$(BONUS): $(B_OBJ) $(LIBS)
+		$(CC) $(FLAG) $(B_OBJ) $(LIBS) -o $(NAME)
 
 all: $(NAME) $(BONUS)
 

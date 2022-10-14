@@ -6,7 +6,7 @@
 /*   By: dpadrini <dpadrini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 12:32:25 by dpadrini          #+#    #+#             */
-/*   Updated: 2022/10/06 12:32:41 by dpadrini         ###   ########.fr       */
+/*   Updated: 2022/10/14 13:05:14 by dpadrini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,24 +75,25 @@ void	ps_control(t_struct *data)
 		ft_printf("KO\n");
 }
 
-int	main(int argc, char *argv[])
+int	main(int argc, char **argv)
 {
 	t_struct	data;
-
+	
 	if (argc <= 1)
 		return (0);
 	if (argc == 2)
-		data.ar_a = ps_init_b(argv[1], &data.size_a);
+		data.ar_a = ps_init_a(argv[1], argc);
 	else
 	{
 		argc -= 1;
 		if (ps_filter(&argv[1], argc) == 0)
 			ps_error("checker error, fix!");
-		data.ar_a = ps_init_a(&argv[1], argc);
+		data.ar_a = ps_init_a(argv[1], &argc);
 		data.size_a = argc;
 	}
-	if (ps_check_doubles(data.ar_a, data.size_a) == 0)
+	if (ps_check_doubles(data.ar_a, data.size_a) != 0)
 		ps_error("Checker found an invalid double number");
+	ft_printf("sono qua\n");
 	data.ar_b = (int *) malloc (sizeof(int) * (int) data.size_a);
 	data.size_b = 0;
 	ps_control(&data);

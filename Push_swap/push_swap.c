@@ -6,7 +6,7 @@
 /*   By: dpadrini <dpadrini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 13:53:41 by dpadrini          #+#    #+#             */
-/*   Updated: 2022/10/10 12:46:35 by dpadrini         ###   ########.fr       */
+/*   Updated: 2022/10/14 13:05:36 by dpadrini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,7 @@ int	main(int ac, char **av)
 	if (ac <= 1)
 		ps_error("wrong number of parameters");
 	if (ac == 2)
-		data.ar_a = ps_init_a(av[1], &data.size_a);
+		data.ar_a = ps_init_a(av[1], data.size_a);
 	else
 	{
 		ac -= 1;

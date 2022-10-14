@@ -6,7 +6,7 @@
 /*   By: dpadrini <dpadrini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 12:31:08 by dpadrini          #+#    #+#             */
-/*   Updated: 2022/10/10 11:41:00 by dpadrini         ###   ########.fr       */
+/*   Updated: 2022/10/14 13:00:53 by dpadrini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,17 +74,24 @@ int	ps_check_doubles(int *ar, int size)
 	int	j;
 
 	i = 0;
+	ft_printf("io qua parto\n");
+	ft_printf("%d\n", size);
 	while (i < size)
 	{
 		j = i + 1;
 		while (j < size)
 		{
 			if (ar[i] == ar[j])
+			{
+				ft_printf("e qua mi romp\n");
 				return (1);
+			}
+			ft_printf("qua vado");
 			j++;
 		}
 		i++;
 	}
+	ft_printf("e qua mi chiudo\n");
 	return (0);
 }
 

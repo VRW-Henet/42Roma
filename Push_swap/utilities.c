@@ -6,7 +6,7 @@
 /*   By: dpadrini <dpadrini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 14:44:19 by dpadrini          #+#    #+#             */
-/*   Updated: 2022/10/10 12:12:41 by dpadrini         ###   ########.fr       */
+/*   Updated: 2022/10/11 15:52:01 by dpadrini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ps_error(char *message)
 {
-	ft_printf("Error\n, '%s\n'", message);
+	ft_printf("Error\n %s\n", message);
 	exit(1);
 }
 

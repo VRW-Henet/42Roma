@@ -6,7 +6,7 @@
 #    By: dpadrini <dpadrini@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/15 14:15:34 by dpadrini          #+#    #+#              #
-#    Updated: 2022/07/20 11:03:07 by dpadrini         ###   ########.fr        #
+#    Updated: 2022/10/11 12:42:37 by dpadrini         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,7 @@ SRC = ft_isalpha.c \
 	   ft_tolower.c \
 	   ft_strchr.c \
 	   ft_strrchr.c \
-	   ft_strncmp.c \
+	   ft_strcmp.c \
 	   ft_memcmp.c \
 	   ft_strnstr.c \
 	   ft_atoi.c \

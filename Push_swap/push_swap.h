@@ -6,7 +6,7 @@
 /*   By: dpadrini <dpadrini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 14:00:09 by dpadrini          #+#    #+#             */
-/*   Updated: 2022/10/10 12:45:06 by dpadrini         ###   ########.fr       */
+/*   Updated: 2022/10/14 13:05:58 by dpadrini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define PUSH_SWAP_H
 
 # include "ft_lib/libft.h"
+# include "ft_lib/Printf/ft_printf.h"
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
@@ -44,7 +45,7 @@ typedef struct s_struct
 int			*ps_trasformer(int *ar, int size);
 
 /*  INIT */
-int			*ps_init_a(char *arg, int *size);
+int			*ps_init_a(char *arg, int size);
 int			*ps_init_b(char **matrix, int size);
 
 /* CHECK_UTILS */
