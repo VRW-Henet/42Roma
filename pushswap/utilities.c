@@ -1,4 +1,4 @@
-#include "Push_swap.h"
+#include "push_swap.h"
 
 void	ps_error(char *message)
 {
@@ -15,7 +15,7 @@ void	ps_seek_for_doubles(int *ar, int size)
 	while (i <= size)
 	{
 		j = i + 1;
-		while (ar[j] != NULL)
+		while (ar[j] != 0)
 		{
 			if (ar[i] == ar[j])
 				ps_error("seek_for_doubles01\nNumber detected twice");
@@ -25,21 +25,19 @@ void	ps_seek_for_doubles(int *ar, int size)
 	}
 }
 
-int	*ps_ar_copy(int *ar, int size)
+void	ps_ar_copy(t_short *best, int size, int *ar)
 {
-	int	*copy;
 	int	i;
 
 	i = 0;
-	while (ar)
+	while (i <= size)
 	{
-		copy[i] = ar[i];
+		best->ar[i] = ar[i];
 		i++;
 	}
-	return (copy);
 }
 
-void	*ps_order(t_short best, int size)
+void	ps_order(t_short *best, int size)
 {
 	int	i;
 	int	j;
@@ -50,31 +48,29 @@ void	*ps_order(t_short best, int size)
 	while (complete != 1)
 	{
 		complete = 1;
-		while (i < 0)
+		while (i < size - 1)
 		{
 			j = i;
-			while (j < size)
+			while (j < size - 1)
 			{
-				if (best.ar[i] < best.ar[j])
-				{
-					ps_swap(best, i, j);
-					complete = 0;
-					best->sort_flag = 1;
-				}
 				j++;
+				if (best->ar[i] > best->ar[j])
+				{
+					ps_swap_order(best, i, j);
+					complete = 0;
+					best->sort_flag = 0;
+					i = 0;
+					j = 0;
+				}
 			}
 			i++;
 		}
 	}
 }
 
-void	ps_swap(t_short best, int i, int j)
+void	ps_swap_order(t_short *best, int i, int j)
 {
-	int swap;
-
-	swap = 0;
-
-	swap = best.ar[i];
-	best.ar[i] = best.ar[j];
-	best.ar[j] = best.ar[i];
+	best->swapper = best->ar[i];
+	best->ar[i] = best->ar[j];
+	best->ar[j] = best->swapper;
 }

@@ -13,14 +13,15 @@ void	ps_push(int *ar_a, int *ar_b, int *size_a, int *size_b)
 		i--;
 	}
 	i = 0;
-	ar_b[i] = ar_a[i];
 	*size_b += 1;
-	*size_a -= 1;
+	ar_b[i] = ar_a[i];
 	while (i < *size_a)
 	{
 		ar_a[i] = ar_a[i + 1];
 		i++;
 	}
+	*size_a -= 1;
+	ar_a[*size_a] = 0;
 }
 
 void	ps_push_a(t_struct *data)

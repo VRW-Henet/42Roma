@@ -1,65 +1,94 @@
-#include "Push_swap.h"
+#include "push_swap.h"
 
-void	ps_engine(t_struct data, t_short best)
-{
-	ps_push_first_sequence(&data, &best);
-	ps_seek_end(&data, &best);
-	ps_push_end_sequence(&data, &best);
-}
-
-void	ps_push_first_sequence(t_struct data, t_short best)
+void	ps_push_first_sequence(t_struct *data, t_short *best)
 {
 	int	size;
-	int	size_flag;
+	int	flag;
 
-	size = data.size_a;
-	size_flag = size / 2;
-	while (size > 0)
+	size = data->size_a - 1;
+	flag = 0;
+	while (flag != 1)
 	{
-		if ((data.ar_a[0] > data.ar_b[0] && data.ar_a[0] < best.mid_value) \
-		|| (data.ar_a[0] > data.ar_b[0] && size < size_flag))
-			ps_push_b(&data);
+		if(data->ar_a[0] > best->mid_value)
+			ps_rotate_a(data);
 		else
-			ps_rotate_a(&data);
+			flag = 1;
+	}
+	while (size >= 0)
+	{
+		if (data->ar_a[0] > data->ar_b[0])
+			ps_push_b(data);
+		else
+			ps_rotate_a(data);
 		size--;
 	}
 }
 
-void	ps_seek_end(t_struct data, t_short best)
+void	ps_wheel(t_struct *data, t_short *best, int i)
 {
-	if (best.direction == 0)
+	if (best->direction != 1)
 	{
-		while (ar_a[0] != best.end_value)
-			ps_rotate_a(&data);
+		while (data->ar_a[0] != i)
+			ps_rotate_a(data);
 	}
 	else
 	{
-		while (ar_a[0] != best.end_value)
-			ps_rev_rotate_a(&data);
+		while (data->ar_a[0] != i)
+			ps_rev_rotate_a(data);
 	}
-	ps_push_b(&data);
 }
 
-void	ps_push_end_sequence(t_struct data, t_short best)
-{
+void	ps_push_end_sequence(t_struct *data, t_short *best)
+{	
 	int	size;
-	int	size_flag;
-	int	i;
 
-	size = data.size_a;
-	size_flag = size / 2;
-	i = 0;
-	while (size > 0)
+	ps_wheel(data, best, best->end_value);
+	ps_push_b(data);
+	size = data->size_a - 1;
+	while (size > 1)
 	{
-		if ((data.ar_a[0] < data.ar_b[0] && data.ar_a[0] > best.mid_value) \
-		|| (data.ar_a[0] < data.ar_b[0] && size < size_flag))
-		{
-			ps_push_b(&data);
-			i++;
-		}
+		if (data->ar_a[0] < data->ar_b[0])
+			ps_push_b(data);
 		else
-			ps_rotate_a(&data);
+			ps_rotate_a(data);
 		size--;
 	}
-	data->high_values_b = i;
+}
+
+void	ps_exe_last_sequence(t_struct *data, t_short *best)
+{
+	int	size;
+	int counter;
+
+	size = data->size_a - 1;
+	ft_printf("starting last sequence procedure\n");
+	if (data->size_a > 3)
+	{
+		counter = part_two(data, best, 0, size);
+	}
+	ps_ar_order(data, best);
+	ps_pull(data, counter, best);
+}
+
+int	part_two(t_struct *data, t_short *best, int counter, int size)
+{
+	int	size_flag;
+
+	size_flag = size / 2;
+	while (size > 0)
+		{
+			if (data->ar_a[0] == best->low_value)
+				ps_rotate_a(data);
+			else if ((data->ar_a[0] > data->ar_b[0] \
+			&& data->ar_a[0] < best->mid_value) \
+			|| (data->ar_a[0] > data->ar_b[0] && size < size_flag))
+			{
+				ps_push_b(data);
+				counter++;
+			}
+			else
+				ps_rotate_a(data);
+			size--;
+		}
+	return (counter);
 }

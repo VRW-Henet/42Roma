@@ -4,6 +4,8 @@ void	ps_rev_rotate(int *ar, int size)
 {
 	int	temp;
 
+	if (size <= 1)
+		ps_error("size too small, can't rotate");
 	size -= 1;
 	temp = ar[size];
 	while (size > 0)

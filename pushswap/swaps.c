@@ -11,15 +11,21 @@ void	ps_swap(int *a, int *b, int size)
 	*b = temp;
 }
 
-void	ps_swap_ab(int *ar, int size, char *ab)
+void	ps_swap_a(t_struct *data)
 {
-	ft_printf("s%c\n", ab);
-	ps_swap(ar, ar + 1, size);
+	ft_printf("sa\n");
+	ps_swap(&data->ar_a[0], &data->ar_a[1], data->size_a);
 }
 
-void	ps_swap_s(int *ar_a, int *ar_b, int size)
+void	ps_swap_b(t_struct *data)
+{
+	ft_printf("sb\n");
+	ps_swap(&data->ar_b[0], &data->ar_b[1], data->size_b);
+}
+
+void	ps_swap_s(t_struct *data)
 {
 	ft_printf("ss\n");
-	ps_swap(ar_a, ar_a + 1, size);
-	ps_swap(ar_b, ar_b + 1, size);
+	ps_swap(&data->ar_a[0], &data->ar_a[1], data->size_a);
+	ps_swap(&data->ar_b[0], &data->ar_b[1], data->size_b);
 }

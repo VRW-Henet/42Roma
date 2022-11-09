@@ -7,14 +7,14 @@ void	ps_rotate(int *ar, int size)
 
 	if (size <= 1)
 		ps_error("size too small, can't rotate");
-	size -= 1;
 	i = 0;
 	temp = ar[0];
-	while (i < size)
+	while (i < size - 1)
 	{
 		ar[i] = ar[i + 1];
 		i++;
 	}
+	ar[i] = temp;
 }
 
 void	ps_rotate_a(t_struct *data)

@@ -8,8 +8,10 @@ SRC =	init.c \
 		swaps.c \
 		push_moves.c \
 		rotations.c \
-		reverse_rotations.c
-SRC_BONUS =
+		reverse_rotations.c \
+		mallocation.c \
+		core.c \
+		piston.c
 
 FLAG = -Wall -Werror -Wextra
 
@@ -20,7 +22,6 @@ GNL = ft_lib/GetNextLine/getnextline.a
 LIBS = $(LIBFT) $(PRINTF) $(GNL)
 
 OBJ = $(SRC:.c=.o)
-B_OBJ = $(SRC_CHECKER:.c=.o)
 
 $(NAME): $(OBJ) $(LIBS)
 		$(CC) $(FLAG) $(OBJ) $(LIBS) -o $(NAME)
@@ -31,13 +32,10 @@ $(NAME): $(OBJ) $(LIBS)
 $(LIBS): ft_lib/
 		make -C ft_lib
 
-$(BONUS): $(B_OBJ) $(LIBS)
-		$(CC) $(FLAG) $(B_OBJ) $(LIBS) -o $(NAME)
-
-all: $(NAME) $(BONUS)
+all: $(NAME)
 
 clean: 
-		rm -f $(OBJ) $(B_OBJ)
+		rm -f $(OBJ)
 
 fclean: clean
 		make fclean -C ft_lib
