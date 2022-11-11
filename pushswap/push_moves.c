@@ -4,8 +4,6 @@ void	ps_push(int *ar_a, int *ar_b, int *size_a, int *size_b)
 {
 	int	i;
 
-	if (*size_a == 0)
-		ps_error("can't push, missing size.");
 	i = *size_b;
 	while (i > 0)
 	{
@@ -26,12 +24,16 @@ void	ps_push(int *ar_a, int *ar_b, int *size_a, int *size_b)
 
 void	ps_push_a(t_struct *data)
 {
+	if (data->size_b < 1)
+		return ;
 	ft_printf("pa\n");
 	ps_push(data->ar_b, data->ar_a, &data->size_b, &data->size_a);
 }
 
 void	ps_push_b(t_struct *data)
 {
+	if (data->size_a < 1)
+		return ;
 	ft_printf("pb\n");
 	ps_push(data->ar_a, data->ar_b, &data->size_a, &data->size_b);
 }

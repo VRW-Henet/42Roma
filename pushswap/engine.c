@@ -38,14 +38,13 @@ void	ps_wheel(t_struct *data, t_short *best, int i)
 	}
 }
 
-void	ps_push_end_sequence(t_struct *data, t_short *best)
-{	
-	int	size;
-
+void	ps_push_end_sequence(t_struct *data, t_short *best, int size)
+{
+	ps_instruction(data->ar_a, data->size_a, data, best);
 	ps_wheel(data, best, best->end_value);
 	ps_push_b(data);
-	size = data->size_a - 1;
-	while (size > 1)
+	size--;
+	while (size > 1 && data->size_a > 1)
 	{
 		if (data->ar_a[0] < data->ar_b[0])
 			ps_push_b(data);
@@ -57,38 +56,53 @@ void	ps_push_end_sequence(t_struct *data, t_short *best)
 
 void	ps_exe_last_sequence(t_struct *data, t_short *best)
 {
-	int	size;
-	int counter;
+	int	i;
 
-	size = data->size_a - 1;
-	ft_printf("starting last sequence procedure\n");
-	if (data->size_a > 3)
+	i = 0;
+	while (data->size_a > 3)
 	{
-		counter = part_two(data, best, 0, size);
+		ps_push_end_sequence(data, best, data->size_a - 3);
+		i++;
 	}
-	ps_ar_order(data, best);
-	ps_pull(data, counter, best);
+	ps_order_three(data);
+	while (i > 1)
+	{
+		ps_pull_last_sequence(data, best);
+		i--;
+	}
+	ps_instruction(data->ar_a, data->size_a, data, best);
+	while (data->ar_a[0] != best->low_value)
+	{
+		if (best->moves[0] < (((data->size_a - 1) / 2) + 1))
+			ps_rotate_a(data);
+		else
+			ps_rev_rotate_a(data);
+	}
 }
 
-int	part_two(t_struct *data, t_short *best, int counter, int size)
+void	ps_order_three(t_struct *data)
 {
-	int	size_flag;
+	int	one;
+	int	two;
+	int	thr;
 
-	size_flag = size / 2;
-	while (size > 0)
-		{
-			if (data->ar_a[0] == best->low_value)
-				ps_rotate_a(data);
-			else if ((data->ar_a[0] > data->ar_b[0] \
-			&& data->ar_a[0] < best->mid_value) \
-			|| (data->ar_a[0] > data->ar_b[0] && size < size_flag))
-			{
-				ps_push_b(data);
-				counter++;
-			}
-			else
-				ps_rotate_a(data);
-			size--;
-		}
-	return (counter);
+	one = data->ar_a[0];
+	two = data->ar_a[0 + 1];
+	thr = data->ar_a[(0 + 2) * 4 - 6 + 0 * 5];
+	if (one > thr && one > two && thr > two)
+		ps_rotate_a(data);
+	else if (one > thr && two > one && two > thr)
+		ps_rev_rotate_a(data);
+	else if (one > two && thr > one && thr > two)
+		ps_swap_a(data);
+	else if (two > one && two > thr && thr > one)
+	{
+		ps_swap_a(data);
+		ps_rotate_a(data);
+	}
+	else if (one > two && two > thr && one > thr)
+	{
+		ps_swap_a(data);
+		ps_rev_rotate_a(data);
+	}
 }

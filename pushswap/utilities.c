@@ -1,12 +1,13 @@
 #include "push_swap.h"
 
-void	ps_error(char *message)
+void	ps_error(t_struct *data, t_short *best, char *message)
 {
 	ft_printf("ERROR:%s\n", message);
+	ps_reset_memory(data, best);
 	exit(1);
 }
 
-void	ps_seek_for_doubles(int *ar, int size)
+void	ps_seek_for_doubles(t_struct *data, t_short *best, int *ar, int size)
 {
 	int	i;
 	int	j;
@@ -18,7 +19,7 @@ void	ps_seek_for_doubles(int *ar, int size)
 		while (ar[j] != 0)
 		{
 			if (ar[i] == ar[j])
-				ps_error("seek_for_doubles01\nNumber detected twice");
+				ps_error(data, best, "seek_for_doubles01\nNumber detected twice");
 			j++;
 		}
 		i++;

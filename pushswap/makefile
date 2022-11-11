@@ -17,7 +17,7 @@ FLAG = -Wall -Werror -Wextra
 
 LIBFT = ft_lib/libft.a
 PRINTF = ft_lib/Printf/libftprintf.a
-GNL = ft_lib/GetNextLine/getnextline.a
+GNL = ft_lib/GetNextLine/GetNextLine.a
 
 LIBS = $(LIBFT) $(PRINTF) $(GNL)
 

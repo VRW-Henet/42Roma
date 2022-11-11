@@ -13,7 +13,7 @@ void	ps_init_single(char *ar, t_struct *data, t_short *best)
 	i = 0;
 	while (values[i] != NULL)
 	{
-		ps_parse(values[i]);
+		ps_parse(data, best, values[i]);
 		data->ar_a[i] = ft_atoi(values[i]);
 		i++;
 	}
@@ -28,17 +28,17 @@ void	ps_init(char **ar, t_struct *data, t_short *best, int size)
 
 	i = 0;
 	ps_deploy_memory(data, best, size);
-	while (ar[i] != 0)
+	while (i < size + 1)
 	{
-		data->ar_a[i] = ft_atoi(ar[i]);
-		ps_parse(ar[i]);
+		ps_parse(data, best, ar[i + 1]);
+		data->ar_a[i] = ft_atoi(ar[i + 1]);
 		i++;
 	}
 	data->size_a = i;
 	data->size_b = 0;
 }
 
-void	ps_parse(char *subject)
+void	ps_parse(t_struct *data, t_short *best, char *subject)
 {
 	int i;
 
@@ -51,14 +51,14 @@ void	ps_parse(char *subject)
 		{
 			while (ft_isdigit(subject[i]))
 				i++;
-			ps_limit(subject);
+			ps_limit(data, best, subject);
 		}
 		else
-			ps_error("parse01\nValues don't respect criteria");
+			ps_error(data, best, "parse01\nValues don't respect criteria");
 	}
 }
 
-void	ps_limit(char *number)
+void	ps_limit(t_struct *data, t_short *best, char *number)
 {
 	long long int	nb;
 	int				i;
@@ -74,7 +74,7 @@ void	ps_limit(char *number)
 		i++;
 	}
 	if (nb > 2147483647)
-		ps_error("limit02\nValues over the limits");
+		ps_error(data, best, "limit02\nValues over the limits");
 }
 
 void	ps_set_pivot(t_struct *data, t_short *best)

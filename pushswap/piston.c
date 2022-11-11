@@ -1,57 +1,36 @@
 #include "push_swap.h"
 
-void	ps_ar_order(t_struct *data, t_short *best)
+void	pullporcamadonna(t_struct *data, t_short *best, int i)
 {
-	int i;
+	while (i >= 0)
+	{
+		if (data->ar_b[0] < data->ar_a[0] && data->ar_a[0] == best->low_value)
+			{
+				ps_push_a(data);
+				best->low_value = data->ar_a[0];
+				i--;
+			}
+		if ((data->ar_a[0] < data->ar_b[0] && data->ar_a[1] > data->ar_b[0]) \
+		|| (data->ar_a[0] < data->ar_b[0] && data->ar_a[0] == best->end_value))
+		{
+			if (data->ar_a[0] == best->end_value)
+				best->end_value = data->ar_b[0];
+			ps_rotate_a(data);
+			ps_push_a(data);
+			i--;
+		}
+		else
+			ps_rotate_a(data);
+	}
+}
+
+void	ps_pull_last_sequence(t_struct *data, t_short *best)
+{
+	int	i;
 
 	i = 0;
-	while (data->size_a > 1)
-	{
-		if (data->ar_a[0] != best->low_value)
-		{
-			best->utility[i] = data->ar_a[0];
-			ps_push_b(data);
-			i++;
-		}
-        if (data->size_a > 1)
-		    ps_rotate_a(data);
-	}
-    while (i > 0)
-	{
-        ps_find_big(best, i);
-        ps_get_big(data, best, i);
-        i--;
-    }
-}
-
-void	ps_find_big(t_short *best, int i)
-{
-	best->nb = best->utility[i];
-	while (i > 0)
-	{
-		if (best->nb > best->utility[i])
-			best->nb = best->utility[i];
-		i--;
-	}
-}
-
-void    ps_get_big(t_struct *data, t_short *best, int i)
-{
-    int j;
-
-    j = 0;
-    while (j <= i)
-    {
-        while (data->ar_b[0] != best->nb)
-        {
-            ps_rotate_b(data);
-            j++;
-        }
-        ps_push_a(data);
-    }
-    while (j > 0)
-    {
-        ps_rev_rotate_b(data);
-        j--;
-    }
+	while (data->ar_b[i] < data->ar_b[i + 1])
+		i++;
+	ps_instruction(data->ar_a, data->size_a, data, best);
+	pullporcamadonna(data, best, i);
 }

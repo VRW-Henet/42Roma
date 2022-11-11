@@ -21,30 +21,24 @@ void	ps_micro_pull(t_struct *data, int size)
 	ps_swap_a(data);
 }
 
-void	ps_pull(t_struct *data, int i, t_short *best)
+void	ps_pull(t_struct *data, t_short *best)
 {
-	while (i > 0 && data->size_b != 0)
+	while (data->size_b != 0)
 	{
+		if (data->ar_b[0] > data->ar_b[data->size_b - 1])
+			ps_rev_rotate_b(data);
 		ps_instruction(data->ar_a, data->size_a, data, best);
 		if (data->ar_a[0] > data->ar_b[0] && \
-			data->ar_a[data->size_a - 1] < data->ar_b[0])
-		{
+			(data->ar_a[data->size_a - 1] < data->ar_b[0] || \
+			data->ar_a[0] == best->low_value))
 			ps_minor_combo(data);
-			i--;
-		}
 		else if ((data->ar_a[0] < data->ar_b[0] && \
 			data->ar_a[1] > data->ar_b[0]) || \
-			(data->ar_a[0] == best->end_value) || \
-			(data->ar_a[1] == best->low_value))
-		{
+			(data->ar_a[0] == best->end_value || \
+			data->ar_a[1] == best->low_value))
 			ps_major_combo(data);
-			i--;
-		}
 		else
-		{
 			ps_rotate_a(data);
-		}
-		ps_show_stacks(data);
 	}	
 }
 
@@ -55,7 +49,6 @@ void	ps_minor_combo(t_struct *data)
 		ps_rev_rotate_b(data);
 		ps_push_a(data);
 	}
-	ps_rotate_a(data);
 	ps_push_a(data);
 }
 
@@ -69,13 +62,11 @@ void	ps_major_combo(t_struct *data)
 		ps_push_a(data);
 	}
 	if (data->ar_b[data->size_b - 1] < data->ar_a[0])
-	{
 		ps_minor_major_combo(data);
-	}
 	else
 	{
+		ps_rotate_a(data);
 		ps_push_a(data);
-		ps_swap_a(data);
 	}
 }
 
