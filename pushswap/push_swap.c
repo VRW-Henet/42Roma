@@ -11,6 +11,7 @@ int main(int argc, char **argv)
 		return (1);
 	ps_initialization(data, best, argc, argv);
 	ps_seek_for_doubles(data, best, data->ar_a, data->size_a);
+	data->flag = 0;
 	ps_instruction(data->ar_a, data->size_a, data, best);
 	if (best->sort_flag == 1)
 		ps_error(data, best, "instruction01\nThe values are already in sequence.");
@@ -50,6 +51,9 @@ void	ps_instruction(int *ar, int size, t_struct *data, t_short *best)
 		i++;
 	}
 	ps_set_pivot(data, best);
+	ps_ar_copy(best, size, ar);
+	ps_longest_sequence(data, best, data->size_a);
+	ps_order(best, size);
 }
 
 void	ps_micro_engine(t_struct *data)
@@ -77,8 +81,6 @@ void	ps_engine(t_struct *data, t_short *best)
 	ps_pull(data, best);
 	ps_instruction(data->ar_a, data->size_a, data, best);
 	ps_wheel(data, best, best->low_value);
-	ps_show_stacks(data);
-	ft_printf("FINE\n");
 }
 
 void	ps_show_stacks(t_struct *data)

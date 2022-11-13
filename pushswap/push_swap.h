@@ -19,6 +19,8 @@ typedef struct s_short
 	int		mid_value;
 	int		end_value;
 	int		mem;
+	int		nb;
+	int		nb_dir;
 }   t_short;
 
 typedef struct s_struct
@@ -27,6 +29,7 @@ typedef struct s_struct
 	int		*ar_b;
 	int		size_a;
 	int		size_b;
+	int		flag;
 }   t_struct;
 
 /* core */
@@ -95,6 +98,10 @@ void	ps_seek_for_doubles(t_struct *data, t_short *best, int *ar, int size);
 void	ps_ar_copy(t_short *best, int size, int *ar);
 void	ps_order(t_short *best, int size);
 void	ps_swap_order(t_short *best, int i, int j);
+
+void	ps_longest_sequence(t_struct *data, t_short *best, int size);
+int		ps_fake_first_push(t_struct *data, t_short *best, int size);
+int		ps_fake_end_push(t_struct *data, t_short *best, int size);
 
 void	ps_show_stacks(t_struct *data);
 

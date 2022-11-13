@@ -3,20 +3,19 @@
 void	ps_push_first_sequence(t_struct *data, t_short *best)
 {
 	int	size;
-	int	flag;
 
 	size = data->size_a - 1;
-	flag = 0;
-	while (flag != 1)
+	while (data->ar_a[0] != best->nb)
 	{
-		if(data->ar_a[0] > best->mid_value)
-			ps_rotate_a(data);
+		if (best->nb_dir == 1)
+			ps_rev_rotate_a(data);
 		else
-			flag = 1;
+			ps_rotate_a(data);
 	}
 	while (size >= 0)
 	{
-		if (data->ar_a[0] > data->ar_b[0])
+		if (data->ar_a[0] > data->ar_b[0] && \
+		(data->ar_a[0] < best->mid_value || size < data->size_a / 2))
 			ps_push_b(data);
 		else
 			ps_rotate_a(data);
@@ -44,9 +43,17 @@ void	ps_push_end_sequence(t_struct *data, t_short *best, int size)
 	ps_wheel(data, best, best->end_value);
 	ps_push_b(data);
 	size--;
+	while (data->ar_a[0] != best->nb)
+	{
+		if (best->nb_dir == 1)
+			ps_rev_rotate_a(data);
+		else
+			ps_rotate_a(data);
+	}
 	while (size > 1 && data->size_a > 1)
 	{
-		if (data->ar_a[0] < data->ar_b[0])
+		if (data->ar_a[0] < data->ar_b[0] && \
+		(data->ar_a[0] > best->mid_value || size < data->size_a / 2))
 			ps_push_b(data);
 		else
 			ps_rotate_a(data);

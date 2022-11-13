@@ -11,7 +11,8 @@ SRC =	init.c \
 		reverse_rotations.c \
 		mallocation.c \
 		core.c \
-		piston.c
+		piston.c \
+		fake_push.c
 
 FLAG = -Wall -Werror -Wextra
 
