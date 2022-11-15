@@ -15,8 +15,8 @@ int main(int argc, char **argv)
 	ps_instruction(data->ar_a, data->size_a, data, best);
 	if (best->sort_flag == 1)
 		ps_error(data, best, "instruction01\nThe values are already in sequence.");
-	if (data->size_a <= 3)
-		ps_micro_engine(data);
+	if (data->size_a <= 7)
+		ps_micro_engine(data, best);
 	else 
 		ps_engine(data, best);
 	ps_reset_memory(data, best);
@@ -27,10 +27,11 @@ void	ps_initialization(t_struct *data, t_short *best, int argc, char **argv)
 {
 	if (argc <= 1)
 		ps_error(data, best, "main01\nInvalid Input, add more arguments");
-	if (argc == 2)
+	else if (argc == 2)
 		ps_init_single(argv[1], data, best);
 	else 
-		ps_init(argv, data, best, argc - 2);
+		ps_init(argv, data, best, argc - 1);
+	data->og_size = data->size_a;
 }
 
 void	ps_instruction(int *ar, int size, t_struct *data, t_short *best)
@@ -40,7 +41,7 @@ void	ps_instruction(int *ar, int size, t_struct *data, t_short *best)
 
 	i = 0;
 	j = 0;
-	ps_ar_copy(best, size, ar);
+	ps_ar_copy(data, best, size, ar);
 	ps_order(best, size);
 	while (i < size)
 	{
@@ -51,12 +52,9 @@ void	ps_instruction(int *ar, int size, t_struct *data, t_short *best)
 		i++;
 	}
 	ps_set_pivot(data, best);
-	ps_ar_copy(best, size, ar);
-	ps_longest_sequence(data, best, data->size_a);
-	ps_order(best, size);
 }
 
-void	ps_micro_engine(t_struct *data)
+void	ps_micro_engine(t_struct *data, t_short *best)
 {
 	if (data->size_a == 2)
 	{
@@ -65,22 +63,28 @@ void	ps_micro_engine(t_struct *data)
 	}
 	else if  (data->size_a == 3)
 		ps_order_three(data);
+	else if (data->size_a <= 7)
+	{
+		while (data->size_a != 3)
+			ps_push_b(data);
+		ps_order_three(data);
+		ps_pull(data, best);
+	}
 }
 
 void	ps_engine(t_struct *data, t_short *best)
 {
 	ps_push_first_sequence(data, best);
-	ps_push_end_sequence(data, best, data->size_a - 1);
+	if (best->sort_flag != 1 && data->size_a > 3)
+		ps_push_end_sequence(data, best, data->size_a - 1);
 	ps_instruction(data->ar_a, data->size_a, data, best);
 	if (best->sort_flag != 1 && data->size_a > 3)
 		ps_exe_last_sequence(data, best);
-	else
+	else 
 		ps_order_three(data);
 	if (data->size_a < 2)
 		ps_micro_pull(data, data->size_b - 1);
 	ps_pull(data, best);
-	ps_instruction(data->ar_a, data->size_a, data, best);
-	ps_wheel(data, best, best->low_value);
 }
 
 void	ps_show_stacks(t_struct *data)

@@ -2,24 +2,18 @@
 
 void	ps_push_first_sequence(t_struct *data, t_short *best)
 {
-	int	size;
+	int j;
 
-	size = data->size_a - 1;
-	while (data->ar_a[0] != best->nb)
+	j = ps_seek_first_number(data, best, best->ar[data->size_a / 5], 0);
+	data->flag = data->temp;
+	best->nb = best->temp;
+	j = ps_id_number(best);
+	ps_get_number(data, best);
+	while (j < data->size_a - 1 && data->size_a > 3)
 	{
-		if (best->nb_dir == 1)
-			ps_rev_rotate_a(data);
-		else
-			ps_rotate_a(data);
-	}
-	while (size >= 0)
-	{
-		if (data->ar_a[0] > data->ar_b[0] && \
-		(data->ar_a[0] < best->mid_value || size < data->size_a / 2))
-			ps_push_b(data);
-		else
-			ps_rotate_a(data);
-		size--;
+		ps_check_min_nb(data, best, j, 0);
+		j = ps_id_number(best);
+		ps_get_number(data, best);
 	}
 }
 
@@ -39,25 +33,18 @@ void	ps_wheel(t_struct *data, t_short *best, int i)
 
 void	ps_push_end_sequence(t_struct *data, t_short *best, int size)
 {
-	ps_instruction(data->ar_a, data->size_a, data, best);
-	ps_wheel(data, best, best->end_value);
-	ps_push_b(data);
-	size--;
-	while (data->ar_a[0] != best->nb)
+	int j;
+
+	j = ps_seek_first_number(data, best, best->ar[size - (size / 4)], 1);
+	data->flag = data->temp;
+	best->nb = best->temp;
+	j = ps_id_number(best);
+	ps_get_number(data, best);
+	while (j > 1 && data->size_a > 3)
 	{
-		if (best->nb_dir == 1)
-			ps_rev_rotate_a(data);
-		else
-			ps_rotate_a(data);
-	}
-	while (size > 1 && data->size_a > 1)
-	{
-		if (data->ar_a[0] < data->ar_b[0] && \
-		(data->ar_a[0] > best->mid_value || size < data->size_a / 2))
-			ps_push_b(data);
-		else
-			ps_rotate_a(data);
-		size--;
+		ps_check_max_nb(data, best, j - 1, 1);
+		j = ps_id_number(best);
+		ps_get_number(data, best);
 	}
 }
 
@@ -71,20 +58,15 @@ void	ps_exe_last_sequence(t_struct *data, t_short *best)
 		ps_push_end_sequence(data, best, data->size_a - 3);
 		i++;
 	}
-	ps_order_three(data);
-	while (i > 1)
+	ps_instruction(data->ar_a, data->size_a, data, best);
+	if (best->sort_flag != 1)
+		ps_order_three(data);
+	while (i >= 1)
 	{
 		ps_pull_last_sequence(data, best);
 		i--;
 	}
 	ps_instruction(data->ar_a, data->size_a, data, best);
-	while (data->ar_a[0] != best->low_value)
-	{
-		if (best->moves[0] < (((data->size_a - 1) / 2) + 1))
-			ps_rotate_a(data);
-		else
-			ps_rev_rotate_a(data);
-	}
 }
 
 void	ps_order_three(t_struct *data)

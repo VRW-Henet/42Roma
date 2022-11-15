@@ -28,7 +28,7 @@ void	ps_init(char **ar, t_struct *data, t_short *best, int size)
 
 	i = 0;
 	ps_deploy_memory(data, best, size);
-	while (i < size + 1)
+	while (i < size)
 	{
 		ps_parse(data, best, ar[i + 1]);
 		data->ar_a[i] = ft_atoi(ar[i + 1]);

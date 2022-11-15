@@ -13,7 +13,7 @@ void	ps_seek_for_doubles(t_struct *data, t_short *best, int *ar, int size)
 	int	j;
 
 	i = 0;
-	while (i <= size)
+	while (i < size)
 	{
 		j = i + 1;
 		while (ar[j] != 0)
@@ -26,12 +26,18 @@ void	ps_seek_for_doubles(t_struct *data, t_short *best, int *ar, int size)
 	}
 }
 
-void	ps_ar_copy(t_short *best, int size, int *ar)
+void	ps_ar_copy(t_struct *data, t_short *best, int size, int *ar)
 {
 	int	i;
 
 	i = 0;
-	while (i <= size)
+	while (i < data->og_size - 1)
+	{
+		best->ar[i] = 0;
+		i++;
+	}
+	i = 0;
+	while (i < size)
 	{
 		best->ar[i] = ar[i];
 		i++;

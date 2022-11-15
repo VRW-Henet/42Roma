@@ -20,7 +20,7 @@ typedef struct s_short
 	int		end_value;
 	int		mem;
 	int		nb;
-	int		nb_dir;
+	int		temp;
 }   t_short;
 
 typedef struct s_struct
@@ -29,7 +29,9 @@ typedef struct s_struct
 	int		*ar_b;
 	int		size_a;
 	int		size_b;
+	int		og_size;
 	int		flag;
+	int		temp;
 }   t_struct;
 
 /* core */
@@ -61,6 +63,7 @@ void	ps_free_matrix(char **matrix, int i);
 
 /* piston */
 void	ps_pull_last_sequence(t_struct *data, t_short *best);
+void	ps_get_number(t_struct *data, t_short *best);
 
 /* push_moves */
 void	ps_push(int *ar_a, int *ar_b, int *size_a, int *size_b);
@@ -71,7 +74,7 @@ void	ps_push_b(t_struct *data);
 int		main(int argc, char **argv);
 void	ps_initialization(t_struct *data, t_short *best, int argc, char **argv);
 void	ps_instruction(int *ar, int size, t_struct *data, t_short *best);
-void	ps_micro_engine(t_struct *data);
+void	ps_micro_engine(t_struct *data, t_short *best);
 void	ps_engine(t_struct *data, t_short *best);
 
 /* reverse_rotations */
@@ -95,13 +98,16 @@ void	ps_swap_s(t_struct *data);
 /* utilities */
 void	ps_error(t_struct *data, t_short *best, char *message);
 void	ps_seek_for_doubles(t_struct *data, t_short *best, int *ar, int size);
-void	ps_ar_copy(t_short *best, int size, int *ar);
+void	ps_ar_copy(t_struct *data, t_short *best, int size, int *ar);
 void	ps_order(t_short *best, int size);
 void	ps_swap_order(t_short *best, int i, int j);
 
-void	ps_longest_sequence(t_struct *data, t_short *best, int size);
-int		ps_fake_first_push(t_struct *data, t_short *best, int size);
-int		ps_fake_end_push(t_struct *data, t_short *best, int size);
+int		ps_seek_first_number(t_struct *data, t_short *best, int x, int flag);
+int		ps_seek_number(t_struct *data, t_short *best, int x, int flag);
+int		ps_id_number(t_short *best);
+void	ps_check_min_nb(t_struct *data, t_short *best, int j, int flag);
+void	ps_check_max_nb(t_struct *data, t_short *best, int j, int flag);
+
 
 void	ps_show_stacks(t_struct *data);
 

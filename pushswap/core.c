@@ -39,7 +39,9 @@ void	ps_pull(t_struct *data, t_short *best)
 			ps_major_combo(data);
 		else
 			ps_rotate_a(data);
-	}	
+	}
+	ps_instruction(data->ar_a, data->size_a, data, best);
+	ps_wheel(data, best, best->low_value);
 }
 
 void	ps_minor_combo(t_struct *data)

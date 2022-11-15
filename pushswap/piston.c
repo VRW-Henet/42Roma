@@ -10,7 +10,7 @@ void	pullporcamadonna(t_struct *data, t_short *best, int i)
 				best->low_value = data->ar_a[0];
 				i--;
 			}
-		if ((data->ar_a[0] < data->ar_b[0] && data->ar_a[1] > data->ar_b[0]) \
+		else if ((data->ar_a[0] < data->ar_b[0] && data->ar_a[1] > data->ar_b[0]) \
 		|| (data->ar_a[0] < data->ar_b[0] && data->ar_a[0] == best->end_value))
 		{
 			if (data->ar_a[0] == best->end_value)
@@ -33,5 +33,19 @@ void	ps_pull_last_sequence(t_struct *data, t_short *best)
 		i++;
 	ps_instruction(data->ar_a, data->size_a, data, best);
 	pullporcamadonna(data, best, i);
+	ps_instruction(data->ar_a, data->size_a, data, best);
+	ps_wheel(data, best, best->low_value);
 }
 
+void	ps_get_number(t_struct *data, t_short *best)
+{
+	while (data->ar_a[0] != best->nb)
+	{
+		if (data->flag == 1)
+			ps_rev_rotate_a(data);
+		else
+			ps_rotate_a(data);
+	}
+	ps_push_b(data);
+	ps_instruction(data->ar_a, data->size_a, data, best);
+}
