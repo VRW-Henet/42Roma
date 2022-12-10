@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   fake_pull.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dpadrini <dpadrini@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/12/10 14:11:12 by dpadrini          #+#    #+#             */
+/*   Updated: 2022/12/10 14:11:12 by dpadrini         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "pushswap.h"
 
 void	ps_fake_pull(t_struct *data, int i[2])
@@ -38,7 +50,7 @@ int	ps_posneg_position(t_struct *data, int val, char stack)
 	while (i < size)
 	{
 		if (tmp == val)
-			break;
+			break ;
 		tmp = data->ar_a[ps_get_id(data, i++, stack)];
 	}
 	if (i == size)
@@ -54,13 +66,12 @@ static int	ps_calculate_azx(t_struct *data, int val)
 	int	mid;
 	int	max;
 
-	return minmidmax(data, val);
-
-	min = ps_get_a_moves(data, val,  -1, 'a');
+	return (minmidmax(data, val));
+	min = ps_get_a_moves(data, val, -1, 'a');
 	if (val < min)
 		return (ps_posneg_position(data, min, 'a'));
-	max = ps_get_a_moves(data, val,  1, 'a');
-	mid = ps_get_a_moves(data, val,  0, 'a');
+	max = ps_get_a_moves(data, val, 1, 'a');
+	mid = ps_get_a_moves(data, val, 0, 'a');
 	if (max < val && val > mid)
 		return (ps_posneg_position(data, min, 'a'));
 	return (ps_posneg_position(data, mid, 'a'));
@@ -68,7 +79,7 @@ static int	ps_calculate_azx(t_struct *data, int val)
 
 static int	part_two(t_struct *data, int *ret, int val, int flag)
 {
-	int a;
+	int	a;
 
 	a = 0;
 	if (flag == 0 && val > *ret \
@@ -98,14 +109,12 @@ int	ps_get_a_moves(t_struct *data, int val, int flag, char stack)
 	while (i++ < size)
 	{
 		tmp = data->ar_a[i - 1];
-		
 		if (flag == 0 && val > tmp \
 			&& ps_get_id(data, i, stack) != -1 \
 			&& val < data->ar_a[ps_get_id(data, i, stack)])
 			ret = data->ar_a[ps_get_id(data, i, stack)];
 		if (flag == -1 && ret > tmp)
 			ret = tmp;
-
 		if (flag == 1 && ret < tmp && val > tmp)
 			ret = tmp;
 	}

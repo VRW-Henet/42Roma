@@ -6,7 +6,7 @@
 /*   By: dpadrini <dpadrini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 13:09:34 by dpadrini          #+#    #+#             */
-/*   Updated: 2022/10/11 13:09:36 by dpadrini         ###   ########.fr       */
+/*   Updated: 2022/12/10 14:56:11 by dpadrini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	ft_strcmp(const char *s1, const char *s2)
 	size_t	i;
 
 	i = 0;
-	if(!s1 || !s2)
+	if (!s1 || !s2)
 		return (-1);
 	while (s1[i] && s2[i] && s2 && s1[i] == s2[i])
 		i++;

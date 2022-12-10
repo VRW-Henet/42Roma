@@ -1,11 +1,23 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   mallocation.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dpadrini <dpadrini@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/12/10 14:11:29 by dpadrini          #+#    #+#             */
+/*   Updated: 2022/12/10 14:11:29 by dpadrini         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "pushswap.h"
 
 int	*ps_mallocation(t_struct *data, t_short *best, int size)
 {
-	int *ar;
+	int	*ar;
 
 	ar = (int *) malloc (sizeof (int) * (size));
-	if(ar == NULL)
+	if (ar == NULL)
 		ps_error(data, best);
 	return (ar);
 }
@@ -17,7 +29,7 @@ void	ps_deploy_memory(t_struct *data, t_short *best, int size)
 	best->ar = ps_mallocation(data, best, size);
 	best->moves = ps_mallocation(data, best, size);
 	best->mem = 1;
-} 
+}
 
 void	ps_reset_memory(t_struct *data, t_short *best)
 {
@@ -29,7 +41,8 @@ void	ps_reset_memory(t_struct *data, t_short *best)
 		free(best->moves);
 	}
 	free(data);
-	free(best);}
+	free(best);
+}
 
 void	ps_free_matrix(char **matrix, int i)
 {

@@ -1,13 +1,25 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   engine.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dpadrini <dpadrini@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/12/10 14:11:06 by dpadrini          #+#    #+#             */
+/*   Updated: 2022/12/10 14:11:06 by dpadrini         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "pushswap.h"
 
-void    ps_push_first_sequence(t_struct *data, t_short *best)
+void	ps_push_first_sequence(t_struct *data, t_short *best)
 {
-	int size;
+	int	size;
 
 	size = data->size_a;
 	while (size >= 0)
 	{
-		if(data->ar_a[0] <= best->highmid_value)
+		if (data->ar_a[0] <= best->highmid_value)
 		{
 			if (data->ar_a[0] <= best->lowmid_value)
 			{
@@ -26,14 +38,13 @@ void    ps_push_first_sequence(t_struct *data, t_short *best)
 	}
 }
 
-void    ps_exe_last_sequence(t_struct *data, t_short *best)
+void	ps_exe_last_sequence(t_struct *data, t_short *best)
 {
 	while (data->size_a > 3)
 		ps_push_b(data);
 	if (!(data->ar_a[0] < data->ar_a[1] && data->ar_a[1] < data->ar_a[2]))
 		ps_order_three(data);
 }
-
 
 void	ps_order_three(t_struct *data)
 {
@@ -65,22 +76,12 @@ void	ps_order_three(t_struct *data)
 void	ps_pull(t_struct *data, t_short *best)
 {
 	int	i[2];
-	static int	a;
 
 	i[0] = -1;
 	i[1] = -1;
 	while (data->size_b > 0)
 	{	
-		//ps_show_stacks(data, best);
-		if (data->ar_a[0] == 99999999999)
-		{
-			ps_error(data, best);
-		}
-
 		ps_fake_pull(data, i);
-		
-		//ft_printf("%d, %d\n", i[0], i[1]);
-
 		ps_circuit(data, i);
 		ps_push_a(data);
 	}

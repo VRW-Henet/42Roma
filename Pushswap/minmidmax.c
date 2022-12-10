@@ -1,9 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minmidmax.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dpadrini <dpadrini@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/12/10 14:11:35 by dpadrini          #+#    #+#             */
+/*   Updated: 2022/12/10 14:23:52 by dpadrini         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "pushswap.h"
 
 int	get_min(t_struct *data)
 {
-	int *ar;
+	int	*ar;
 	int	ret;
 	int	i;
 
@@ -21,7 +32,7 @@ int	get_min(t_struct *data)
 
 int	get_max(t_struct *data)
 {
-	int *ar;
+	int	*ar;
 	int	ret;
 	int	i;
 
@@ -39,7 +50,7 @@ int	get_max(t_struct *data)
 
 int	get_mid(t_struct *data, int bval)
 {
-	int *ar;
+	int	*ar;
 	int	ret;
 	int	i;
 
@@ -50,20 +61,13 @@ int	get_mid(t_struct *data, int bval)
 	{
 		if (bval > ar[i] && (i + 1) < data->size_a && bval < ar[i + 1])
 		{
-			//ft_printf("bval: %d mid chosen: %d\n", bval, ar[i + 1]);
 			ret = ar[i + 1];
 			break ;
 		}
-		//else if (!(i + 1 < data->size_a) && bval > ar[i] && bval < ar[0])
-		//{
-		//	ret = ar[0];
-		//	break ;
-		//}
 		i++;
 	}
 	return (ret);
 }
-
 
 int	minmidmax(t_struct *data, int bval)
 {
@@ -72,7 +76,6 @@ int	minmidmax(t_struct *data, int bval)
 	int	max;
 
 	min = get_min(data);
-	//ft_printf("min: %d mid: %d max: %d bval: %d\n\n", min, mid, max, bval);
 	if (bval < min)
 		return (ps_posneg_position(data, min, 'a'));
 	max = get_max(data);

@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dpadrini <dpadrini@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/12/10 14:11:17 by dpadrini          #+#    #+#             */
+/*   Updated: 2022/12/10 14:11:17 by dpadrini         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "pushswap.h"
 
 void	ps_init_single(char *ar, t_struct *data, t_short *best)
 {
-	char **values;
-	int i;
+	char	**values;
+	int		i;
 
 	i = 0;
 	values = ft_split(ar, ' ');
@@ -24,7 +36,7 @@ void	ps_init_single(char *ar, t_struct *data, t_short *best)
 
 void	ps_init(char **ar, t_struct *data, t_short *best, int size)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	ps_deploy_memory(data, best, size);
@@ -40,7 +52,7 @@ void	ps_init(char **ar, t_struct *data, t_short *best, int size)
 
 void	ps_parse(t_struct *data, t_short *best, char *subject)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (subject[i] != 0)

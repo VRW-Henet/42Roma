@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   pushswap.h                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dpadrini <dpadrini@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/12/10 15:27:57 by dpadrini          #+#    #+#             */
+/*   Updated: 2022/12/10 15:34:57 by dpadrini         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PUSHSWAP_H
 # define PUSHSWAP_H
 
@@ -15,12 +27,12 @@ typedef struct s_short
 	int		sort_flag;
 	int		low_value;
 	int		lowmid_value;
-	int     highmid_value;
+	int		highmid_value;
 	int		end_value;
 	int		mem;
 	int		direction;
 	int		swapper;
-}   t_short;
+}	t_short;
 
 typedef struct s_struct
 {
@@ -30,10 +42,10 @@ typedef struct s_struct
 	int		size_b;
 	int		og_size;
 	int		flag;
-}   t_struct;
+}	t_struct;
 
 /* PUSHWAP */
-int 	main(int argc, char **argv);
+int		main(int argc, char **argv);
 void	ps_initialization(t_struct *data, t_short *best, int argc, char **argv);
 void	ps_micro_engine(t_struct *data, t_short *best);
 void	ps_engine(t_struct *data, t_short *best);
@@ -42,8 +54,8 @@ void	ps_engine(t_struct *data, t_short *best);
 void	ps_instruction(int *ar, int size, t_struct *data, t_short *best);
 
 /* ENGINE */
-void    ps_push_first_sequence(t_struct *data, t_short *best);
-void    ps_exe_last_sequence(t_struct *data, t_short *best);
+void	ps_push_first_sequence(t_struct *data, t_short *best);
+void	ps_exe_last_sequence(t_struct *data, t_short *best);
 void	ps_order_three(t_struct *data);
 void	ps_pull(t_struct *data, t_short *best);
 void	ps_circuit(t_struct *data, int i[2]);
@@ -56,7 +68,7 @@ void	ps_limit(t_struct *data, t_short *best, char *number);
 void	ps_set_pivot(t_struct *data, t_short *best);
 
 /* MALLOCATION */
-int	    *ps_mallocation(t_struct *data, t_short *best, int size);
+int		*ps_mallocation(t_struct *data, t_short *best, int size);
 void	ps_deploy_memory(t_struct *data, t_short *best, int size);
 void	ps_reset_memory(t_struct *data, t_short *best);
 void	ps_free_matrix(char **matrix, int i);
@@ -91,30 +103,25 @@ void	ps_ss(t_struct *data);
 void	ps_error(t_struct *data, t_short *best);
 void	ps_seek_for_doubles(t_struct *data, t_short *best, int *ar, int size);
 void	ps_ar_copy(t_struct *data, t_short *best, int size, int *ar);
-void	ps_order(t_short *best, int size);
+void	ps_order(t_short *best, int size, int i, int complete);
 void	ps_swap_order(t_short *best, int i, int j);
 
 /* UTILITIES_B */
-void   	ps_piston(t_struct *data);
+void	ps_piston(t_struct *data);
 int		ft_module(int n);
 int		ps_lower_index(int temp[2], int i[2]);
 void	ps_get_stack_infos(t_struct *data, int *top, int *size, char stack);
 int		ps_get_id(t_struct *data, int i, char stack);
 
 /* FAKE_PULL */
-void		ps_fake_pull(t_struct *data, int i[2]);
-int			ps_posneg_position(t_struct *data, int val, char stack);
-static int	ps_calculate_a(t_struct *data, int val);
-static int	part_two(t_struct *data, int *ret, int val, int flag);
-int			ps_get_a_moves(t_struct *data, int val, int flag, char stack);
+void	ps_fake_pull(t_struct *data, int i[2]);
+int		ps_posneg_position(t_struct *data, int val, char stack);
+int		ps_get_a_moves(t_struct *data, int val, int flag, char stack);
 
 /* MINMIDMAX */
-int	minmidmax(t_struct *data, int bval);
+int		minmidmax(t_struct *data, int bval);
 
 /* BONUS */
-int main(int argc, char **argv);
-
-
-void	ps_show_stacks(t_struct *data, t_short *best);
+int		main(int argc, char **argv);
 
 #endif

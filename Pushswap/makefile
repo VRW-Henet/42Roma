@@ -1,6 +1,9 @@
+
 NAME = push_swap
-BONUS = checker
+BONUS_NAME = checker
+
 CC = gcc
+
 SRC =	pushswap.c \
 		instruction.c \
 		engine.c \
@@ -15,7 +18,7 @@ SRC =	pushswap.c \
 		utilities_b.c \
 		minmidmax.c
 
-BONUS_SRC = bonus.c \
+BONUS_SRC = checker.c \
 			push_moves.c \
 			rotations.c \
 			reverse_rotations.c \
@@ -36,29 +39,30 @@ LIBS = $(LIBFT) $(PRINTF) $(GNL)
 OBJ = $(SRC:.c=.o)
 B_OBJ = $(BONUS_SRC:.c=.o)
 
+all: $(NAME)
+
+bonus: $(BONUS_NAME)
+
 $(NAME): $(OBJ) $(LIBS)
 		$(CC) $(FLAG) $(OBJ) $(LIBS) -o $(NAME)
 
-$(BONUS): $(B_OBJ) $(LIBS)
-		$(CC) $(FLAG) $(B_OBJ) $(LIBS) -o $(NAME)
+$(BONUS_NAME): $(B_OBJ) $(LIBS)
+		$(CC) $(FLAG) $(B_OBJ) $(LIBS) -o $(BONUS_NAME)
 
 %.o: %.c push_swap.h
-		$(CC) $(FLAG) -c $< -o $@
+		$(CC) -o $@ $(FLAG) -c $<
 		
 $(LIBS): ft_lib/
 		make -C ft_lib
 
-all: $(NAME) $(BONUS)
-
 clean: 
-		rm -f $(OBJ)
+		rm -f *.o
 
 fclean: clean
-		rm -f $(B_OBJ)
-		rm $(NAME)
-		rm $(BONUS)
+		rm -f $(NAME)
+		rm -f $(BONUS_NAME)
 		make fclean -C ft_lib
 
 re: fclean all
 
-.PHONY: all clean fclean re
+#.PHONY: all clean fclean re

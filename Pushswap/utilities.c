@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utilities.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dpadrini <dpadrini@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/12/10 14:12:19 by dpadrini          #+#    #+#             */
+/*   Updated: 2022/12/10 14:12:19 by dpadrini         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "pushswap.h"
 
 void	ps_error(t_struct *data, t_short *best)
@@ -44,13 +56,10 @@ void	ps_ar_copy(t_struct *data, t_short *best, int size, int *ar)
 	}
 }
 
-void	ps_order(t_short *best, int size)
+void	ps_order(t_short *best, int size, int i, int complete)
 {
-	int	i;
 	int	j;
-	int complete;
 
-	i = 0;
 	best->sort_flag = 1;
 	while (complete != 1)
 	{

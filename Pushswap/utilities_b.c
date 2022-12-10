@@ -1,24 +1,36 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utilities_b.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dpadrini <dpadrini@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/12/10 14:12:14 by dpadrini          #+#    #+#             */
+/*   Updated: 2022/12/10 14:12:14 by dpadrini         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "pushswap.h"
 
-void    ps_piston(t_struct *data)
+void	ps_piston(t_struct *data)
 {
-    int     i;
+	int	i;
 
-    i = ps_get_a_moves(data, 0, -1, 'a');
-    i = ps_posneg_position(data, i, 'a');
-    while (i != 0)
-    {
-        if (i > 0)
-        {
-            ps_rotate_a(data);
-            i--;
-        }
-        else
-        {
-            ps_rev_rotate_a(data);
-            i++;
-        }
-    }
+	i = ps_get_a_moves(data, 0, -1, 'a');
+	i = ps_posneg_position(data, i, 'a');
+	while (i != 0)
+	{
+		if (i > 0)
+		{
+			ps_rotate_a(data);
+			i--;
+		}
+		else
+		{
+			ps_rev_rotate_a(data);
+			i++;
+		}
+	}
 }
 
 int	ft_module(int n)
@@ -56,11 +68,10 @@ void	ps_get_stack_infos(t_struct *data, int *top, int *size, char stack)
 int	ps_get_id(t_struct *data, int i, char stack)
 {
 	int	top;
-	int size;
-	int bot;
+	int	size;
+	int	bot;
 
 	ps_get_stack_infos(data, &top, &size, stack);
-
 	i++;
 	i = i % data->size_a;
 	return (i);
