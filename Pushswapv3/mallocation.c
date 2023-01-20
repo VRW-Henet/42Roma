@@ -40,8 +40,8 @@ void	ps_reset_memory(t_struct *data, t_short *best)
 		free(best->ar);
 		free(best->moves);
 	}
-	free(data);
 	free(best);
+	free(data);
 }
 
 void	ps_free_matrix(char **matrix, int i)

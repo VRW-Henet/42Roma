@@ -16,7 +16,8 @@ SRC =	pushswap.c \
 		swaps.c \
 		utilities.c \
 		utilities_b.c \
-		minmidmax.c
+		minmidmax.c \
+		ps_atoi.c
 
 BONUS_SRC = checker.c \
 			push_moves.c \
@@ -26,7 +27,8 @@ BONUS_SRC = checker.c \
 			init.c \
 			utilities.c \
 			instruction.c \
-			mallocation.c 
+			mallocation.c \
+			ps_atoi.c
 
 FLAG = -Wall -Werror -Wextra
 

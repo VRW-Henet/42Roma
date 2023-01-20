@@ -30,7 +30,7 @@ void	ps_seek_for_doubles(t_struct *data, t_short *best, int *ar, int size)
 		j = i + 1;
 		while (ar[j] != 0)
 		{
-			if (ar[i] == ar[j])
+			if (ar[i] == ar[j] || ar[i] > 2147483647 || ar[j] > 2147483647)
 				ps_error(data, best);
 			j++;
 		}

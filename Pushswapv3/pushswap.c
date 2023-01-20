@@ -63,7 +63,10 @@ int	main(int argc, char **argv)
 	data->flag = 0;
 	ps_instruction(data->ar_a, data->size_a, data, best);
 	if (best->sort_flag == 1)
+	{
+		ps_reset_memory(data, best);
 		return (0);
+	}
 	if (data->size_a <= 7)
 		ps_micro_engine(data, best);
 	else

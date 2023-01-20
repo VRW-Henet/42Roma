@@ -70,7 +70,6 @@ void	ps_check_moves(t_struct *data)
 {
 	char	*moves;
 
-	ft_printf("sdf\n");
 	moves = get_next_line(0);
 	while (1)
 	{
@@ -88,14 +87,12 @@ int	main(int argc, char **argv)
 	char		*str;
 	t_struct	*data;
 	t_short		*best;
-	int			i;
 
 	str = NULL;
 	data = (t_struct *) malloc(sizeof(t_struct));
 	best = (t_short *) malloc(sizeof(t_short));
-	i = 0;
-	 if (argc < 2)
-	 	return (-1);
+	if (argc < 2)
+		return (-1);
 	if (argc == 2)
 		ps_init_single(argv[1], data, best);
 	else
@@ -106,7 +103,6 @@ int	main(int argc, char **argv)
 	if (best->sort_flag == 1)
 		return (0);
 	ps_check_moves(data);
-	ft_printf("done1\n");
 	ps_reset_memory(data, best);
 	return (0);
 }

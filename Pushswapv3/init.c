@@ -26,24 +26,28 @@ void	ps_init_single(char *ar, t_struct *data, t_short *best)
 	while (values[i] != NULL)
 	{
 		ps_parse(data, best, values[i]);
-		data->ar_a[i] = ft_atoi(values[i]);
+		data->ar_a[i] = ps_atoi(values[i], data, best);
 		i++;
 	}
 	data->size_a = i;
 	data->size_b = 0;
-	ps_free_matrix(values, i);
+	if (data->size_a > 1)
+		ps_free_matrix(values, i + 1);
+	else
+		ps_free_matrix(values, i);
+	free(values);
 }
 
 void	ps_init(char **ar, t_struct *data, t_short *best, int size)
 {
-	int	i;
+	long int	i;
 
 	i = 0;
 	ps_deploy_memory(data, best, size);
 	while (i < size)
 	{
 		ps_parse(data, best, ar[i + 1]);
-		data->ar_a[i] = ft_atoi(ar[i + 1]);
+		data->ar_a[i] = ps_atoi(ar[i + 1], data, best);
 		i++;
 	}
 	data->size_a = i;

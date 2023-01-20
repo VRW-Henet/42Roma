@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ps_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dpadrini <dpadrini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/13 17:26:26 by dpadrini          #+#    #+#             */
-/*   Updated: 2023/01/20 16:07:33 by dpadrini         ###   ########.fr       */
+/*   Created: 2023/01/20 16:09:20 by dpadrini          #+#    #+#             */
+/*   Updated: 2023/01/20 16:45:26 by dpadrini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "pushswap.h"
 
 static int	ft_atoi2(const char *str, int i)
 {
@@ -28,7 +28,7 @@ static int	ft_atoi2(const char *str, int i)
 	return (s);
 }
 
-int	ft_atoi(const char *str)
+int	ps_atoi(const char *str, t_struct *data, t_short *best)
 {
 	int					i;
 	int					s;
@@ -45,5 +45,7 @@ int	ft_atoi(const char *str)
 		i++;
 	while ('0' <= str[i] && str[i] <= '9')
 		r = r * 10 + (str[i++] - 48);
+	if (r > 2147483647)
+		ps_error(data, best);
 	return (r * s);
 }

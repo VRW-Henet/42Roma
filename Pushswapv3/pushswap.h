@@ -6,7 +6,7 @@
 /*   By: dpadrini <dpadrini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 15:27:57 by dpadrini          #+#    #+#             */
-/*   Updated: 2023/01/18 12:58:26 by dpadrini         ###   ########.fr       */
+/*   Updated: 2023/01/20 16:45:04 by dpadrini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,6 +120,9 @@ int		ps_get_a_moves(t_struct *data, int val, int flag, char stack);
 
 /* MINMIDMAX */
 int		minmidmax(t_struct *data, int bval);
+
+/* ATOI */
+int		ps_atoi(const char *str, t_struct *data, t_short *best);
 
 /* BONUS */
 int		ps_control(char *moves);

@@ -6,7 +6,7 @@
 /*   By: dpadrini <dpadrini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 11:14:06 by dpadrini          #+#    #+#             */
-/*   Updated: 2022/06/24 10:58:31 by dpadrini         ###   ########.fr       */
+/*   Updated: 2023/01/20 13:39:57 by dpadrini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,10 +74,9 @@ char	*gnl_read_and_save(int fd, char *save)
 	buff = malloc((BUFFER_SIZE + 1) * sizeof(char));
 	if (!buff)
 		return (NULL);
-	read_bytes = 1;
+	read_bytes = read(fd, buff, BUFFER_SIZE);
 	while (!gnl_strchr(save, '\n') && read_bytes != 0)
 	{
-		read_bytes = read(fd, buff, BUFFER_SIZE);
 		if (read_bytes == -1)
 		{
 			free(buff);
@@ -85,6 +84,7 @@ char	*gnl_read_and_save(int fd, char *save)
 		}
 		buff[read_bytes] = '\0';
 		save = gnl_strjoin(save, buff);
+		read_bytes = read(fd, buff, BUFFER_SIZE);
 	}
 	free(buff);
 	return (save);
