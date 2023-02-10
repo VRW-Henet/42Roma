@@ -5,99 +5,117 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: dpadrini <dpadrini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/06 12:32:25 by dpadrini          #+#    #+#             */
-/*   Updated: 2022/10/14 13:05:14 by dpadrini         ###   ########.fr       */
+/*   Created: 2022/12/10 16:18:00 by dpadrini          #+#    #+#             */
+/*   Updated: 2022/12/10 16:18:00 by dpadrini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "pushswap.h"
 
-void	ps_checkmove(char *str)
+int	ps_control(char *moves)
 {
-	if (ft_strcmp(str, "pa\n") == 0)
-		return ;
-	if (ft_strcmp(str, "pb\n") == 0)
-		return ;
-	if (ft_strcmp(str, "ra\n") == 0 || ft_strcmp(str, "rr\n") == 0)
-		return ;
-	if (ft_strcmp(str, "rb\n") == 0 || ft_strcmp(str, "rr\n") == 0)
-		return ;
-	if (ft_strcmp(str, "rra\n") == 0 || ft_strcmp(str, "rrr\n") == 0)
-		return ;
-	if (ft_strcmp(str, "rrb\n") == 0 || ft_strcmp(str, "rrr\n") == 0)
-		return ;
-	if (ft_strcmp(str, "sa\n") == 0 || ft_strcmp(str, "ss\n") == 0)
-		return ;
-	if (ft_strcmp(str, "sb\n") == 0 || ft_strcmp(str, "ss\n") == 0)
-		return ;
-	ps_error("checked invalid moves");
+	if (moves == NULL)
+		return (0);
+	ft_printf("Error\n");
+	return (0);
 }
 
-void	ps_correct(t_struct *data, char *str)
+void	ps_check_final(t_struct *data)
 {
-	ps_checkmove(str);
-	if (ft_strcmp(str, "pa\n") == 0)
-		ps_push(data->ar_b, data->ar_a, &data->size_b, &data->size_a);
-	if (ft_strcmp(str, "pb\n") == 0)
-		ps_push(data->ar_a, data->ar_b, &data->size_a, &data->size_b);
-	if (ft_strcmp(str, "ra\n") == 0 || ft_strcmp(str, "rr\n") == 0)
-		ps_shift(data->ar_a, data->size_a);
-	if (ft_strcmp(str, "rb\n") == 0 || ft_strcmp(str, "rr\n") == 0)
-		ps_shift(data->ar_b, data->size_b);
-	if (ft_strcmp(str, "rra\n") == 0 || ft_strcmp(str, "rrr\n") == 0)
-		ps_rev_shift(data->ar_a, data->size_a);
-	if (ft_strcmp(str, "rrb\n") == 0 || ft_strcmp(str, "rrr\n") == 0)
-		ps_rev_shift(data->ar_b, data->size_b);
-	if (ft_strcmp(str, "sa\n") == 0 || ft_strcmp(str, "ss\n") == 0)
-		ps_swap(data->ar_a, data->ar_a + 1, data->size_a);
-	if (ft_strcmp(str, "sb\n") == 0 || ft_strcmp(str, "ss\n") == 0)
-		ps_swap(data->ar_b, data->ar_b + 1, data->size_b);
-}
+	int	i;
 
-void	ps_control(t_struct *data)
-{
-	char	*str;
-
-	str = get_next_line(0);
-	while (ps_order(data->ar_a, data->size_a) == 0 || data->size_b != 0)
+	i = 0;
+	while (i < data->size_a - 1)
 	{
-		if (str == NULL)
-			break ;
-		ps_correct(data, str);
-		free (str);
-		str = get_next_line(0);
+		if (data->ar_a[i] > data->ar_a[i + 1])
+		{
+			ft_printf("KO\n");
+			return ;
+		}
+		i++;
 	}
-	if (str != NULL)
-		free(str);
-	if (ps_order(data->ar_a, data->size_a) == 1)
-		ft_printf("OK\n");
-	else
+	if (data->size_b != 0)
+	{
+		ft_printf("%d, %d\n", data->size_a, data->size_b);
 		ft_printf("KO\n");
+		return ;
+	}
+	ft_printf("OK\n");
+}
+
+int	ps_execute_moves(t_struct *data, char *moves)
+{
+	if (ft_strcmp(moves, "pa\n") == 0)
+		ps_push_a(data);
+	else if (ft_strcmp(moves, "pb\n") == 0)
+		ps_push_b(data);
+	else if (ft_strcmp(moves, "rra\n") == 0)
+		ps_rev_rotate_a(data);
+	else if (ft_strcmp(moves, "rrb\n") == 0)
+		ps_rev_rotate_b(data);
+	else if (ft_strcmp(moves, "rrr\n") == 0)
+		ps_rev_rotate_r(data);
+	else if (ft_strcmp(moves, "sa\n") == 0)
+		ps_swap_a(data);
+	else if (ft_strcmp(moves, "sb\n") == 0)
+		ps_swap_b(data);
+	else if (ft_strcmp(moves, "ss\n") == 0)
+		ps_swap_s(data);
+	else if (ft_strcmp(moves, "ra\n") == 0)
+		ps_rotate_a(data);
+	else if (ft_strcmp(moves, "rb\n") == 0)
+		ps_rotate_b(data);
+	else if (ft_strcmp(moves, "rr\n") == 0)
+		ps_rotate_r(data);
+	else
+		return (ps_control(moves));
+	return (1);
+}
+
+void	ps_check_moves(t_struct *data)
+{
+	char	*moves;
+
+	moves = get_next_line(0);
+	while (1)
+	{
+		if (moves == NULL)
+			break ;
+		if (!ps_execute_moves(data, moves))
+		{
+			free(moves);
+			return ;
+		}
+		free(moves);
+		moves = get_next_line(0);
+	}
+	free(moves);
+	ps_check_final(data);
 }
 
 int	main(int argc, char **argv)
 {
-	t_struct	data;
-	
-	if (argc <= 1)
-		return (0);
-	if (argc == 2)
-		data.ar_a = ps_init_a(argv[1], argc);
-	else
+	t_struct	*data;
+	t_short		*best;
+
+	data = (t_struct *) malloc(sizeof(t_struct));
+	best = (t_short *) malloc(sizeof(t_short));
+	if (argc < 2)
 	{
-		argc -= 1;
-		if (ps_filter(&argv[1], argc) == 0)
-			ps_error("checker error, fix!");
-		data.ar_a = ps_init_a(argv[1], &argc);
-		data.size_a = argc;
+		free(data);
+		free(best);
+		return (-1);
 	}
-	if (ps_check_doubles(data.ar_a, data.size_a) != 0)
-		ps_error("Checker found an invalid double number");
-	ft_printf("sono qua\n");
-	data.ar_b = (int *) malloc (sizeof(int) * (int) data.size_a);
-	data.size_b = 0;
-	ps_control(&data);
-	free(data.ar_a);
-	free(data.ar_b);
+	if (argc == 2)
+		ps_init_single(argv[1], data, best);
+	else
+		ps_init(argv, data, best, argc - 1);
+	data->checker = 1;
+	data->og_size = data->size_a;
+	ps_seek_for_doubles(data, best, data->ar_a, data->size_a);
+		data->flag = 0;
+	ps_instruction(data->ar_a, data->size_a, data, best);
+	ps_check_moves(data);
+	ps_reset_memory(data, best);
 	return (0);
 }

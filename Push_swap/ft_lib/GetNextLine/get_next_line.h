@@ -6,7 +6,7 @@
 /*   By: dpadrini <dpadrini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 11:14:46 by dpadrini          #+#    #+#             */
-/*   Updated: 2022/10/11 15:30:19 by dpadrini         ###   ########.fr       */
+/*   Updated: 2022/04/06 11:42:24 by dpadrini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,13 @@
 
 # include <stdlib.h>
 # include <unistd.h>
-# include "../libft.h"
 
 size_t	gnl_strlen(char *str);
 char	*gnl_strchr(char *s, int c);
 char	*gnl_strjoin(char *s1, char *s2);
 char	*get_next_line(int fd);
-char	*gnl_get_line(char *save);
-char	*gnl_save(char *save);
-char	*gnl_read_and_save(int fd, char *save);
+char	*ft_get_line(char *save);
+char	*ft_save(char *save);
+char	*ft_read_and_save(int fd, char *save);
 
 #endif

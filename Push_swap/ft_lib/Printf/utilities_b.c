@@ -44,8 +44,6 @@ int	len_num_hex(unsigned long n)
 
 	if (n == 0)
 		return (1);
-	if (n < 0)
-		n = -n;
 	result = 0;
 	while (n)
 	{

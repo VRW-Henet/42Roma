@@ -5,57 +5,88 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: dpadrini <dpadrini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/25 14:44:19 by dpadrini          #+#    #+#             */
-/*   Updated: 2022/10/11 15:52:01 by dpadrini         ###   ########.fr       */
+/*   Created: 2022/12/10 14:12:19 by dpadrini          #+#    #+#             */
+/*   Updated: 2022/12/10 14:12:19 by dpadrini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "pushswap.h"
 
-void	ps_error(char *message)
+void	ps_error(t_struct *data, t_short *best)
 {
-	ft_printf("Error\n %s\n", message);
+	ft_printf("Error\n");
+	ps_reset_memory(data, best);
 	exit(1);
 }
 
-int	*ps_ardup(int *ar, int size)
-{
-	int	*copy;
-	int	i;
-
-	copy = (int *) malloc(sizeof(int) * size);
-	ps_mallok(copy);
-	i = 0;
-	while (i < size)
-	{
-		copy[i] = ar[i];
-		i++;
-	}
-	return (copy);
-}
-
-void	ps_sort_ar(int *ar, int size)
+void	ps_seek_for_doubles(t_struct *data, t_short *best, int *ar, int size)
 {
 	int	i;
-
-	i = 0;
-	while (i < size - 1)
-	{
-		if (ar[i] > ar[i + 1])
-			ps_swap(ar + i, ar + (i + 1), size);
-		i++;
-	}
-}
-
-void	ps_freematrix(int **matrix, int size)
-{
-	int	i;
+	int	j;
 
 	i = 0;
 	while (i < size)
 	{
-		free(matrix[i]);
+		j = i + 1;
+		while (ar[j] != 0)
+		{
+			if (ar[i] == ar[j] || ar[i] > 2147483647 || ar[j] > 2147483647)
+				ps_error(data, best);
+			j++;
+		}
 		i++;
 	}
-	free(matrix);
+}
+
+void	ps_ar_copy(t_struct *data, t_short *best, int size, int *ar)
+{
+	int	i;
+
+	i = 0;
+	while (i < data->og_size - 1)
+	{
+		best->ar[i] = 0;
+		i++;
+	}
+	i = 0;
+	while (i < size)
+	{
+		best->ar[i] = ar[i];
+		i++;
+	}
+}
+
+void	ps_order(t_short *best, int size, int i, int complete)
+{
+	int	j;
+
+	best->sort_flag = 1;
+	while (complete != 1)
+	{
+		complete = 1;
+		while (i < size - 1)
+		{
+			j = i;
+			while (j < size - 1)
+			{
+				j++;
+				if (best->ar[i] > best->ar[j])
+				{
+					ps_swap_order(best, i, j);
+					complete = 0;
+					best->sort_flag = 0;
+					i = 0;
+					j = 0;
+				}
+			}
+			i++;
+		}
+	}
+}
+
+void	ps_swap_order(t_short *best, int i, int j)
+{
+	best->swapper = best->ar[i];
+	best->ar[i] = best->ar[j];
+	best->ar[j] = best->swapper;
 }

@@ -1,27 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   swaps.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dpadrini <dpadrini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/06 11:14:46 by dpadrini          #+#    #+#             */
-/*   Updated: 2022/04/06 11:42:24 by dpadrini         ###   ########.fr       */
+/*   Created: 2022/10/06 14:23:26 by dpadrini          #+#    #+#             */
+/*   Updated: 2022/10/10 12:34:25 by dpadrini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include "push_swap.h"
 
-# include <stdlib.h>
-# include <unistd.h>
+void	ps_swap(int *a, int *b, int size)
+{
+	int	temp;
 
-size_t	gnl_strlen(char *str);
-char	*gnl_strchr(char *s, int c);
-char	*gnl_strjoin(char *s1, char *s2);
-char	*get_next_line(int fd);
-char	*ft_get_line(char *save);
-char	*ft_save(char *save);
-char	*ft_read_and_save(int fd, char *save);
+	if (size <= 1)
+		ps_error("size too smöl, swap aborted");
+	temp = *a;
+	*a = *b;
+	*b = temp;
+}
 
-#endif
+void	ps_swap_ab(int *ar, int size, char *ab)
+{
+	ft_printf("s%c\n", ab);
+	ps_swap(ar, ar + 1, size);
+}
+
+void	ps_swap_s(int *ar_a, int *ar_b, int size)
+{
+	ft_printf("ss\n");
+	ps_swap(ar_a, ar_a + 1, size);
+	ps_swap(ar_b, ar_b + 1, size);
+}

@@ -6,7 +6,7 @@
 /*   By: dpadrini <dpadrini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 17:26:26 by dpadrini          #+#    #+#             */
-/*   Updated: 2023/01/20 16:07:33 by dpadrini         ###   ########.fr       */
+/*   Updated: 2022/01/27 14:44:02 by dpadrini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,5 +45,12 @@ int	ft_atoi(const char *str)
 		i++;
 	while ('0' <= str[i] && str[i] <= '9')
 		r = r * 10 + (str[i++] - 48);
+	if (r >= 9223372036854775808ULL)
+	{
+		if (s == 1)
+			return (-1);
+		else
+			return (0);
+	}
 	return (r * s);
 }

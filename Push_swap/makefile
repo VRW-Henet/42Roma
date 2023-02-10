@@ -1,68 +1,68 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: dpadrini <dpadrini@student.42.fr>          +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2022/07/25 10:18:05 by dpadrini          #+#    #+#              #
-#    Updated: 2022/10/11 15:47:59 by dpadrini         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
 
 NAME = push_swap
-BONUS = bonus
+BONUS_NAME = checker
+
 CC = gcc
-SRC = check_util.c \
-		findcomb.c \
-		finder.c \
+
+SRC =	pushswap.c \
+		instruction.c \
+		engine.c \
+		fake_pull.c \
 		init.c \
-		moves.c \
-		push_swap.c \
-		push.c \
-		rev_rotate.c \
-		rotate.c \
+		mallocation.c \
+		push_moves.c \
+		reverse_rotations.c \
+		rotations.c \
 		swaps.c \
 		utilities.c \
+		utilities_b.c \
+		minmidmax.c \
+		ps_atoi.c
 
-SRC_CHECKER = checker.c \
-				check_util.c \
-				init.c \
-				push.c \
-				rev_rotate.c \
-				rotate.c \
-				swaps.c \
-				utilities.c
+BONUS_SRC = checker.c \
+			push_moves.c \
+			rotations.c \
+			reverse_rotations.c \
+			swaps.c \
+			init.c \
+			utilities.c \
+			instruction.c \
+			mallocation.c \
+			ps_atoi.c
 
 FLAG = -Wall -Werror -Wextra
 
 LIBFT = ft_lib/libft.a
 PRINTF = ft_lib/Printf/libftprintf.a
-GNL = ft_lib/GetNextLine/getnextline.a
+GNL = ft_lib/GetNextLine/GetNextLine.a
 
 LIBS = $(LIBFT) $(PRINTF) $(GNL)
 
 OBJ = $(SRC:.c=.o)
-B_OBJ = $(SRC_CHECKER:.c=.o)
+B_OBJ = $(BONUS_SRC:.c=.o)
+
+all: $(NAME)
+
+bonus: $(BONUS_NAME)
 
 $(NAME): $(OBJ) $(LIBS)
 		$(CC) $(FLAG) $(OBJ) $(LIBS) -o $(NAME)
 
+$(BONUS_NAME): $(B_OBJ) $(LIBS)
+		$(CC) $(FLAG) $(B_OBJ) $(LIBS) -o $(BONUS_NAME)
+
 %.o: %.c push_swap.h
-		$(CC) $(FLAG) -c $< -o $@
+		$(CC) -o $@ $(FLAG) -c $<
 		
 $(LIBS): ft_lib/
 		make -C ft_lib
 
-$(BONUS): $(B_OBJ) $(LIBS)
-		$(CC) $(FLAG) $(B_OBJ) $(LIBS) -o $(NAME)
-
-all: $(NAME) $(BONUS)
-
 clean: 
-		rm -f $(OBJ) $(B_OBJ)
+		rm -f *.o
 
 fclean: clean
+		rm -f $(NAME)
+		rm -f $(BONUS_NAME)
 		make fclean -C ft_lib
 
 re: fclean all

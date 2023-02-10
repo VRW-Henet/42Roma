@@ -5,33 +5,46 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: dpadrini <dpadrini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/06 14:23:26 by dpadrini          #+#    #+#             */
-/*   Updated: 2022/10/10 12:34:25 by dpadrini         ###   ########.fr       */
+/*   Created: 2022/12/10 14:12:10 by dpadrini          #+#    #+#             */
+/*   Updated: 2022/12/10 14:12:10 by dpadrini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "pushswap.h"
 
-void	ps_swap(int *a, int *b, int size)
+void	ps_swap(int *a, int *b)
 {
 	int	temp;
 
-	if (size <= 1)
-		ps_error("size too smöl, swap aborted");
 	temp = *a;
 	*a = *b;
 	*b = temp;
 }
 
-void	ps_swap_ab(int *ar, int size, char *ab)
+void	ps_swap_a(t_struct *data)
 {
-	ft_printf("s%c\n", ab);
-	ps_swap(ar, ar + 1, size);
+	if (data->size_a <= 1)
+		return ;
+	if (data->checker != 1)
+		ft_printf("sa\n");
+	ps_swap(&data->ar_a[0], &data->ar_a[1]);
 }
 
-void	ps_swap_s(int *ar_a, int *ar_b, int size)
+void	ps_swap_b(t_struct *data)
 {
-	ft_printf("ss\n");
-	ps_swap(ar_a, ar_a + 1, size);
-	ps_swap(ar_b, ar_b + 1, size);
+	if (data->size_b <= 1)
+		return ;
+	if (data->checker != 1)
+		ft_printf("sb\n");
+	ps_swap(&data->ar_b[0], &data->ar_b[1]);
+}
+
+void	ps_swap_s(t_struct *data)
+{
+	if (data->size_a <= 1 || data->size_b <= 1)
+		return ;
+	if (data->checker != 1)
+		ft_printf("ss\n");
+	ps_swap(&data->ar_a[0], &data->ar_a[1]);
+	ps_swap(&data->ar_b[0], &data->ar_b[1]);
 }

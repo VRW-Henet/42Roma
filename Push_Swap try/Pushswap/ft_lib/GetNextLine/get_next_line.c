@@ -6,13 +6,13 @@
 /*   By: dpadrini <dpadrini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 11:14:06 by dpadrini          #+#    #+#             */
-/*   Updated: 2022/04/09 16:49:07 by dpadrini         ###   ########.fr       */
+/*   Updated: 2022/06/24 10:58:31 by dpadrini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*ft_get_line(char *save)
+char	*gnl_get_line(char *save)
 {
 	int		i;
 	char	*s;
@@ -40,7 +40,7 @@ char	*ft_get_line(char *save)
 	return (s);
 }
 
-char	*ft_save(char *save)
+char	*gnl_save(char *save)
 {
 	int		i;
 	int		c;
@@ -66,7 +66,7 @@ char	*ft_save(char *save)
 	return (s);
 }
 
-char	*ft_read_and_save(int fd, char *save)
+char	*gnl_read_and_save(int fd, char *save)
 {
 	char	*buff;
 	int		read_bytes;
@@ -97,10 +97,10 @@ char	*get_next_line(int fd)
 
 	if (fd < 0 || BUFFER_SIZE <= 0 || fd > 256)
 		return (0);
-	save[fd] = ft_read_and_save(fd, save[fd]);
+	save[fd] = gnl_read_and_save(fd, save[fd]);
 	if (!save[fd])
 		return (NULL);
-	line = ft_get_line(save[fd]);
-	save[fd] = ft_save(save[fd]);
+	line = gnl_get_line(save[fd]);
+	save[fd] = gnl_save(save[fd]);
 	return (line);
 }

@@ -50,7 +50,11 @@ void	print_stuff(int n, t_flag *flag, int io)
 void	printsymbol(int num, int n, t_flag *flag)
 {
 	int	c;
+	int	a;
 
+	a = 0;
+	if (num < 0)
+		a = 1;
 	c = len_num(num);
 	if (len_num(num) < flag->prec)
 		c = flag->prec;
