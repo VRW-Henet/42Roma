@@ -1,5 +1,7 @@
+use Env;
+
 #printhead
-puts '<!DOCTYPE html>
+print ('<!DOCTYPE html>
 <html lang="en">
 <head>
     <title>
@@ -7,18 +9,20 @@ puts '<!DOCTYPE html>
     </title>   
 </head>
 <body>
-    <h2 style="text-align: center;"><strong>THESE ARE YOUR ENVIRONMENT VARIABLES:</strong></h2>'
+    <h2 style="text-align: center;"><strong>THESE ARE YOUR ENVIRONMENT VARIABLES:</strong></h2>',"\n");
 
 #printenv
-print '<p>'
-for key in ENV
-    print key
-    puts "<br>"
-end
-print'</p>'
+
+print ("<p>","\n");
+for (keys %ENV) 
+{ 
+  print "$_  =  $ENV{$_}\n";
+  print ("<br>","\n");
+}
+print ("<p>","\n");
 
 #printend
-puts "<hr>
+print ('<hr>
 <h5>
     FROM WIKIPEDIA:
     <i>Environment variables are part of the environment in which a process runs. 
@@ -30,11 +34,8 @@ puts "<hr>
 </body>
 <footer>
 <h6>
-<i>cgi environment for 42webwerver.<br>This was scripted in ruby.</i>
+<i>cgi environment for 42webwerver.<br>This was scripted in perl.</i>
 </h6>
 </footer>
 
-</html>"
-
-
-    
+</html>',"\n");
